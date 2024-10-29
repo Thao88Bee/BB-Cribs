@@ -2,10 +2,9 @@
 
 ## Database Schema Design
 
-`<insert database schema design here>`
-![alt text](image.png)
+![db-schema]
 
-
+[db-schema]: ./images/db-schema.png
 
 ## API Documentation
 
