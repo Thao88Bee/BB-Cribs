@@ -3,17 +3,7 @@
 const { defaultValueSchemable, mapFinderOptions } = require('sequelize/lib/utils');
 
 /** @type {import('sequelize-cli').Migration} */
-let options = {
-   schema: {
-     tableName: 'Users',
-     columns: [
-       { name: "id", type: "int", allowNull: false, autoIncrement: true, primaryKey: true },
-       { name: "username", type: "string", allowNull: false, unique: true },
-       { name: "email", type: "string", allowNull: false, unique: true},
-       { name: "hashedPassword", type: "string binary", allowNull: false}
-     ]
-   }
- };
+let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;  // define your schema in options object
 
