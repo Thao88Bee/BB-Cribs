@@ -1,14 +1,14 @@
 const express = require('express');
+const router = express.Router();
+
 const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { User } = require('../../db/models');
-
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-const router = express.Router();
 
 const validateLogin = [
     check('credential')
@@ -21,13 +21,15 @@ const validateLogin = [
     handleValidationErrors
 ];
 
-  router.get(
+router.get(
     '/',
     (req, res) => {
         const { user } = req;
         if(user) {
             const safeUser = {
                 id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
                 username: user.username,
             };
@@ -63,6 +65,8 @@ router.post(
   
       const safeUser = {
         id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         username: user.username,
       };
@@ -100,6 +104,8 @@ router.post(
 
             const safeUser = {
                 id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
                 username: user.username,
             };
