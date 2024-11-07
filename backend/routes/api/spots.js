@@ -61,11 +61,52 @@ router.post('/spots', requireAuth, validateSpot, async (req, res, next) => {
     res.json(spot)
 });
 /////////////////////////////////////////////////////////////////////////////////////////
+//edit a spot
+router.put('/spots/:spotId', requireAuth, validateSpot, async (req, res, next) => {
+    const spotId = req.params.spotId;
+    const spot = await Spot.findByPk(spotId);
 
+    const { address, city, state, country, lat, lng, name, description, price} = req.body;
+    if(address) {
+        spot.address = address;
+    }
+    if(city) {
+        spot.city = city;
+    }
+    if(state) {
+        spot.state = state;
+    }
+    if(country) {
+        spot.country = country;
+    }
+    if(lat) {
+        spot.lat = lat
+    }
+    if(lng) {
+        spot.lng = lng;
+    }
+    if(name) {
+        spot.name = name;
+    }
+    if(description) {
+        spot.description = description;
+    }
+    if(price) {
+        spot.price = price;
+    }
+
+    await spot.save();
+    res.json(spot)
+});
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////
 //DELETE SPOT
 router.delete('/spots/:spotId', requireAuth, async (req, res, next) => {
     const spotId = req.params.spotId;
-    const spot = req.params.spots;
+    const spot = await Spot.findByPk(spotId);
     await spot.destroy();
 
      if(!spot) {
