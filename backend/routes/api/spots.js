@@ -100,8 +100,6 @@ router.put('/spots/:spotId', requireAuth, validateSpot, async (req, res, next) =
 });
 
 
-
-
 //////////////////////////////////////////////////////////////////////////////
 //DELETE SPOT
 router.delete('/spots/:spotId', requireAuth, async (req, res, next) => {
