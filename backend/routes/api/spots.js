@@ -9,8 +9,41 @@ const { route } = require('./session.js')
 
 const router = express.Router();
 
+const validateSpot = [
+    check('address')
+        .exists({ checkFalsy: true })
+        .withMessage('Street address is required'),
+    check('city')
+        .exists({ checkFalsy: true })
+        .withMessage('City is required'),
+    check('state')
+        .exists({ checkFalsy: true })
+        .withMessage('State is required'),
+    check('country')
+        .exists({ checkFalsy: true })
+        .withMessage('Country is required'),
+    check('lat')
+        .isDecimal()
+        .withMessage('Latitude is not valid'),
+    check('lng')
+        .isDecimal()
+        .withMessage('Longitude is not valid'),
+    check('name')
+         .exists({checkFalse: true})
+         .isLength({max: 50})
+         .withMessage('Name must be less than 50 characters'),
+    check('description')
+        .exists({checkFalsy: true})
+        .withMessage('Description is required'),
+    check('price')
+        .exists({ checkFalsy: true })
+        .isInt({ min: 1 })
+        .withMessage('Price per day must be a positive number'),
+    handleValidationErrors
+];
+
 //CREATE SPOT
-router.post('/spots', requireAuth, async (req, res, next) => {
+router.post('/spots', requireAuth, validateSpot, async (req, res, next) => {
     const ownerId = req.user.id;
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const spot = await Spot.create({
