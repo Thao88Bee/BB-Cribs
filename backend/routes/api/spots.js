@@ -36,12 +36,12 @@ const validateSpot = [
 ];
 /////////////////////////////////////////////////////////////////////////////
 //Get all Spots owned by the Current User
-router.get(" /users/:userId/spots", requireAuth, async (req, res, next) => {
+router.get("/users/:userId/spots", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
 
   const spots = await Spot.findAll({
      where: {
-      ownerId: id
+      ownerId: userId
      },
      attributes: {
       include: [ [ sequelize.fn("ROUND", sequelize.fn("AVG",sequelize.col("Reviews.stars")), 2), "avgRating"], ]
