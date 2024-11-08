@@ -19,8 +19,8 @@ const validateSpot = [
   check("country")
     .exists({ checkFalsy: true })
     .withMessage("Country is required dood"),
-  check("lat").isDecimal().withMessage("Latitude is not valid"),
-  check("lng").isDecimal().withMessage("Longitude is not valid"),
+  check("lat").isDecimal().withMessage("Latitude must be within -90 and 90"),
+  check("lng").isDecimal().withMessage("Longitude must be within -180 and 180"),
   check("name")
     .exists({ checkFalse: true })
     .isLength({ max: 50 })
