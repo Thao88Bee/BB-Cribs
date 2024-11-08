@@ -1,7 +1,7 @@
 const express = require("express");
 const { Op, Sequelize, ValidationError } = require("sequelize");
 const { setTokenCookie, requireAuth } = require("../../utils/auth");
-const { Spot, User } = require("../../db/models");
+const { Spot, User, Booking } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const spot = require("../../db/models/spot.js");
@@ -92,6 +92,12 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
   await spot.save();
   res.json(spot);
 });
+
+// Get Booking From SpotId
+router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
+  const userId = req.user.id;
+  const spotId = req.params.spotId;
+})
 
 //Delete a Spot
 router.delete("/:spotId", requireAuth, async (req, res, next) => {
