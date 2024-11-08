@@ -1,32 +1,32 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-const sessionRouter = require('./session.js');
-const usersRouter = require('./users.js');
-const bookingsRouter = require('./bookings.js');
-const spotsRouter = require('./spots.js')
+const sessionRouter = require("./session.js");
+const usersRouter = require("./users.js");
+const bookingsRouter = require("./bookings.js");
+const spotsRouter = require("./spots.js");
 
 // const { setTokenCookie } = require('../../utils/auth.js');
 // const { User } = require('../../db/models');
-const { restoreUser } = require('../../utils/auth.js');
+const { restoreUser } = require("../../utils/auth.js");
 // const { requireAuth } = require('../../utils/auth.js');
 
 router.use(restoreUser);
 
-router.use('/session', sessionRouter);
+router.use("/session", sessionRouter);
 
-router.use('/users', usersRouter);
+router.use("/users", usersRouter);
 
-router.use('/bookings', bookingsRouter);
+router.use("/bookings", bookingsRouter);
 
-router.use('/spots', spotsRouter);
+router.use("/spots", spotsRouter);
 
-router.post('/test', (req, res) => {
-    res.json({ requestBody: req.body });
+router.post("/test", (req, res) => {
+  res.json({ requestBody: req.body });
 });
 
 // Keep this route to test frontend setup in Mod 5
-router.post('/test', function(req, res) {
-    res.json({ requestBody: req.body });
+router.post("/test", function (req, res) {
+  res.json({ requestBody: req.body });
 });
 
 // router.get('/set-token-cookie', async (_req, res) => {
@@ -53,6 +53,5 @@ router.post('/test', function(req, res) {
 //         return res.json(req.user);
 //     }
 // );
-
 
 module.exports = router;

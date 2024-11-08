@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const { Spot } = require('../models');
+const { Spot } = require("../models");
 
 let options = {};
-if (process.env.NODE_ENV === 'production') {
-  options.schema = process.env.SCHEMA;  // define your schema in options object
+if (process.env.NODE_ENV === "production") {
+  options.schema = process.env.SCHEMA; // define your schema in options object
 }
 
 const spots = [
@@ -13,13 +13,13 @@ const spots = [
     address: "123 Disney Lane",
     city: "San Francisco",
     state: "California",
-    country: 'United States of America',
+    country: "United States of America",
     lat: 37.7645358,
     lng: -122.4730327,
     name: "App Academy",
     description: "Place where web developers are created",
     price: 123,
-    avgRating: 3
+    avgRating: 3,
   },
   {
     ownerId: 2,
@@ -32,7 +32,7 @@ const spots = [
     name: "Code Camp",
     description: "Immersive coding bootcamp for aspiring developers",
     price: 499,
-    avgRating: 2
+    avgRating: 2,
   },
   {
     ownerId: 3,
@@ -45,18 +45,18 @@ const spots = [
     name: "Tech Innovators Hub",
     description: "A collaborative space for tech entrepreneurs and developers",
     price: 350,
-    avgRating: 3
-  }
-]
+    avgRating: 3,
+  },
+];
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await Spot.bulkCreate(spots);
   },
 
-  async down (queryInterface, Sequelize) {
-    options.tableName = 'Spots';
+  async down(queryInterface, Sequelize) {
+    options.tableName = "Spots";
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, { [Op.or]: spots });
-  }
+  },
 };
