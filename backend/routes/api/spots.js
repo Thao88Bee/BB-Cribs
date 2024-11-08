@@ -6,7 +6,6 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const spot = require("../../db/models/spot.js");
 const { route } = require("./session.js");
-const spot = require("../../db/models/spot.js");
 
 const router = express.Router();
 
