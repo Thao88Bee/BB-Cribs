@@ -13,20 +13,20 @@ const bookings = [
   {
     spotId: 3,
     userId: 2,
-    startDate: new DATE("2024-12-20"),
-    endDate: new DATE("2024-12-25"),
+    startDate: new DATE("2024-12-20T11:00:00.000Z"),
+    endDate: new DATE("2024-12-25T11:00:00.000Z"),
   },
   {
     spotId: 2,
     userId: 1,
-    startDate: new DATE("2024-07-03"),
-    endDate: new DATE("2024-07-10"),
+    startDate: new DATE("2024-07-03T11:00:00.000Z"),
+    endDate: new DATE("2024-07-10T11:00:00.000Z"),
   },
   {
     spotId: 1,
     userId: 3,
-    startDate: new DATE("2024-11-06"),
-    endDate: new DATE("2024-11-10"),
+    startDate: new DATE("2024-11-06T11:00:00.000Z"),
+    endDate: new DATE("2024-11-10T11:00:00.000Z"),
   },
 ];
 
