@@ -6,6 +6,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const spot = require("../../db/models/spot.js");
 const { route } = require("./session.js");
+const spot = require("../../db/models/spot.js");
 
 const router = express.Router();
 
@@ -37,7 +38,7 @@ const validateSpot = [
 
 
 //Get details of a Spot from an id
-router.get("/spots/:spotId", async (req, res, next) => {
+router.get("/:spotId", async (req, res, next) => {
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId, {
     include: [
@@ -95,7 +96,29 @@ router.post("/", requireAuth, validateSpot, async (req, res, next) => {
   });
   res.json(spot);
 });
+/////////////////////////////////////////////////////////////////////////////////////////
 
+//Add an Image to a Spot based on the Spot's id
+router.post("/:spotId/spotImages", requireAuth, async (req, res, next) => {
+  const spotId = req.params.spotId;
+  const { url, preview } = req.body;
+  const spot = await Spot.findByPk(spotId);
+
+  if(spot) {
+    const image = await SpotImage.create({ url, preview, spotId});
+
+    const imageId = image.id;
+    const imageInformation = await SpotImage.scope("defaultScope").findByPk(imageId);
+
+    res.json(imageInformation);
+  } else {
+    res.status(404).json({
+      "message": "pot couldn't be found",
+    })
+  }
+});
+
+/////////////////////////////////////////////////////////////////////////////////////
 //Edit a Spot
 router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
   const spotId = req.params.spotId;
