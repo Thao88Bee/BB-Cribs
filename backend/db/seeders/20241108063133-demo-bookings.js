@@ -31,12 +31,7 @@ const bookings = [
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    try {
-      await Booking.bulkCreate(bookings, { validate: true });
-    } catch(err) {
-      console.error(err);
-      throw err;
-    }
+      await Booking.bulkCreate(bookings);
   },
 
   async down (queryInterface, Sequelize) {
