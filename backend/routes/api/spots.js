@@ -260,7 +260,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
 });
 //////////////////////////////////////////////////////////////////////////////////////////
 //Create a Review for a Spot based on the Spot's id
-router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
+router.post("/:spotId/reviews", requireAuth, validatingReview, async (req, res, next) => {
   const userId = req.user.id;
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId);
