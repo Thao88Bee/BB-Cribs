@@ -34,6 +34,9 @@ const validateSpot = [
     .withMessage("Price per day must be a positive number"),
   handleValidationErrors,
 ];
+
+
+
 /////////////////////////////////////////////////////////////////////////////
 //Get all Spots owned by the Current User
 router.get("/users/:userId/spots", requireAuth, async (req, res, next) => {
