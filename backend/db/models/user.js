@@ -6,7 +6,6 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
-<<<<<<< HEAD
       User.hasMany(
         models.Spot, {
           foreignKey: 'ownerId',
@@ -14,9 +13,7 @@ module.exports = (sequelize, DataTypes) => {
           hooks: true
         }
       );
-=======
       User.hasMany(models.Booking, { foreignKey: 'userId', onDelete: 'CASCADE' })
->>>>>>> origin
     }
   }
 

@@ -1,12 +1,6 @@
 'use strict';
-<<<<<<< HEAD
 const { Model} = require('sequelize');
 
-=======
-const {
-  Model
-} = require('sequelize');
->>>>>>> origin
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
     /**
@@ -16,7 +10,6 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-<<<<<<< HEAD
        Spot.belongsTo(
         models.User, {
           foreignKey: 'ownerId',
@@ -76,29 +69,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       allowNull: false
     }
-=======
-    }
-  }
-  Spot.init({
-    ownerId: DataTypes.INTEGER,
-    address: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    country: DataTypes.STRING,
-    lat: DataTypes.DECIMAL,
-    lng: DataTypes.DECIMAL,
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    avgRating: DataTypes.DECIMAL
->>>>>>> origin
   }, {
     sequelize,
     modelName: 'Spot',
   });
   return Spot;
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> origin
