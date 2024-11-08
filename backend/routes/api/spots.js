@@ -42,8 +42,8 @@ const validateSpot = [
     handleValidationErrors
 ];
 
-//CREATE SPOT
-router.post('/spots', requireAuth, validateSpot, async (req, res, next) => {
+//Create a Spot
+router.post('/', requireAuth, validateSpot, async (req, res, next) => {
     const ownerId = req.user.id;
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     const spot = await Spot.create({
@@ -60,9 +60,9 @@ router.post('/spots', requireAuth, validateSpot, async (req, res, next) => {
     })
     res.json(spot)
 });
-/////////////////////////////////////////////////////////////////////////////////////////
-//edit a spot
-router.put('/spots/:spotId', requireAuth, validateSpot, async (req, res, next) => {
+
+//Edit a Spot
+router.put('/:spotId', requireAuth, validateSpot, async (req, res, next) => {
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId);
 
@@ -99,28 +99,18 @@ router.put('/spots/:spotId', requireAuth, validateSpot, async (req, res, next) =
     res.json(spot)
 });
 
-
-//////////////////////////////////////////////////////////////////////////////
-//DELETE SPOT
-router.delete('/spots/:spotId', requireAuth, async (req, res, next) => {
+//Delete a Spot
+router.delete('/:spotId', requireAuth, async (req, res, next) => {
     const spotId = req.params.spotId;
     const spot = await Spot.findByPk(spotId);
-    await spot.destroy();
 
      if(!spot) {
-        res.status(404).json({
-            "message": "Spot does not exist boi",
-            "statusCode": 404
-        })
+        res.statusCode = 404;
+        res.json({ message: "Spot couldn't be found" })
      } else {
-        res.json({
-            "message": "Successfully deleted",
-            "statusCode": 200
-        })
+        await spot.destroy();
+        res.json({ message: "Successfully deleted" })
      }
 })
-
-
-
 
 module.exports = router;

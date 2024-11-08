@@ -67,7 +67,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     avgRating: {
       type: DataTypes.DECIMAL,
-      allowNull: false
+      allowNull: true
     }
   }, {
     sequelize,
