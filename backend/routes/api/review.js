@@ -49,6 +49,46 @@ router.get('/users/:userId/reviews', requireAuth, async (req, res, next) => {
     }
     res.json({ "Reviews": reviews})
 });
+///////////////////////////////////////////////////////////////////////////////
+//edit a review
+router.put('/reviews/:reviewsId', requireAuth, validateReview, async (req, res, next) => {
+    const reviewId = req.params.reviewId;
+    const editReview = await Review.findByPk(reviewId);
+    const { review, stars } = req.body;
+
+    if(review) {
+        editReview.review = review
+    }
+    if(stars) {
+        editReview.stars = stars
+    }
+    await editReview.save();
+    res.json(editReview)
+});
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//delete a review
+
+router.delete('/reviews/:reviewsId', requireAuth, async (req, res, next) => {
+    const reviewId = req.params.reviewsId;
+    const deleteReview = await Review.findByPk(reviewId);
+
+    await deleteReview.destroy();
+
+    res.json({
+        "message": "Successfully deleted",
+        "statusCode": 200
+    })
+});
+
+
+
+
+
+
+
+
 
 
 module.exports = router
