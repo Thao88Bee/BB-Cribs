@@ -34,9 +34,52 @@ const validateSpot = [
     .withMessage("Price per day must be a positive number"),
   handleValidationErrors,
 ];
+/////////////////////////////////////////////////////////////////////////////
+//Get all Spots owned by the Current User
+router.get(" /users/:userId/spots", requireAuth, async (req, res, next) => {
+  const userId = req.user.id;
 
+  const spots = await Spot.findAll({
+     where: {
+      ownerId: id
+     },
+     attributes: {
+      include: [ [ sequelize.fn("ROUND", sequelize.fn("AVG",sequelize.col("Reviews.stars")), 2), "avgRating"], ]
+     },
+     include: [
+      {
+        mode: Review,
+        attributes: []
+      },
+     ],
+     group: ["Spot.id"],
+     raw :true
+  });
 
+   for(let spot of spots) {
+    const image = await SpotImage.findAll({
+      where: {
+        [Op.and]: [
+          {
+             spotId: spot.id,
+          },
+          {
+            preview: true
+          }
+        ]
+      },
+      raw: true
+    });
+     if(!image.length) {
+      spot.previewImage = null;
+     } else{
+      spot.previewImage = image[0]["url"];
+     }
+   }
+   res.json({ "Spots": spots})
+});
 
+//////////////////////////////////////////////
 //Get details of a Spot from an id
 router.get("/:spotId", async (req, res, next) => {
   const spotId = req.params.spotId;
@@ -74,8 +117,6 @@ router.get("/:spotId", async (req, res, next) => {
     })
    }
 });
-
-
 ////////////////////////////////////////////////////////////////////////////
 //Create a Spot
 router.post("/", requireAuth, validateSpot, async (req, res, next) => {
