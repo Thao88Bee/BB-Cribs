@@ -19,20 +19,28 @@ module.exports = {
         },
         url: {
           type: Sequelize.STRING,
+          allowNull: false,
         },
         preview: {
           type: Sequelize.BOOLEAN,
         },
         spotId: {
           type: Sequelize.INTEGER,
+          allowNull: false,
+          references: {
+            model: "Spots"
+          },
+          onDelete: "CASCADE",
         },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,
+          defaultValue: new Date(),
         },
         updatedAt: {
           allowNull: false,
           type: Sequelize.DATE,
+          defaultValue: new Date(),
         },
       },
       options
