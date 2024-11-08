@@ -10,19 +10,19 @@ if (process.env.NODE_ENV === 'production') {
 
 const bookings = [
   {
-    spotId: null,
+    spotId: 3,
     userId: 2,
     startDate: '2021-11-17',
     endDate: '2021-11-18',
   },
   {
-    spotId: null,
+    spotId: 2,
     userId: 1,
     startDate: '2021-11-19',
     endDate: '2021-11-20',
   },
   {
-    spotId: null,
+    spotId: 1,
     userId: 3,
     startDate: '2021-11-21',
     endDate: '2021-11-22',
