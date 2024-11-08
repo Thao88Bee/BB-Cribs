@@ -157,6 +157,12 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
   res.json(spot);
 });
 
+// Get Booking From SpotId
+router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
+  const userId = req.user.id;
+  const spotId = req.params.spotId;
+})
+
 //Delete a Spot
 router.delete("/:spotId", requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;

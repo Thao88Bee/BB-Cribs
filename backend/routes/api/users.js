@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const { setTokenCookie, requireAuth, restoreUser } = require("../../utils/auth");
-const { User } = require("../../db/models");
+const { User,Booking } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -51,5 +51,10 @@ const { handleValidationErrors } = require("../../utils/validation");
 //     user: safeUser,
 //   });
 // });
+
+router.get("/:userId/bookings", requireAuth, async (req, res, next) => {
+  const currUser = req.user.id;
+
+})
 
 module.exports = router;

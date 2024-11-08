@@ -1,5 +1,6 @@
 "use strict";
 
+const { DATE } = require("sequelize");
 const { Booking } = require("../models");
 const bcrypt = require("bcryptjs");
 
@@ -12,20 +13,20 @@ const bookings = [
   {
     spotId: 3,
     userId: 2,
-    startDate: "2021-11-17",
-    endDate: "2021-11-18",
+    startDate: new DATE("2024-12-20"),
+    endDate: new DATE("2024-12-25"),
   },
   {
     spotId: 2,
     userId: 1,
-    startDate: "2021-11-19",
-    endDate: "2021-11-20",
+    startDate: new DATE("2024-07-03"),
+    endDate: new DATE("2024-07-10"),
   },
   {
     spotId: 1,
     userId: 3,
-    startDate: "2021-11-21",
-    endDate: "2021-11-22",
+    startDate: new DATE("2024-11-06"),
+    endDate: new DATE("2024-11-10"),
   },
 ];
 
