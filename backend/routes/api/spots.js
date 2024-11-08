@@ -287,7 +287,7 @@ router.post("/:spotId/reviews", requireAuth, async (req, res, next) => {
   if(review) {
     return res.status(500).json({
       "message": "User already has a review for this spot",
-      "statusCode": 403
+      "statusCode": 500
     })
   } else {
      const { review, stars} = req.body;
