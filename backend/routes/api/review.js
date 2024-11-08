@@ -10,7 +10,7 @@ const { Sequelize } = require('sequelize');
 
 const router = express.Router();
 
-const validateReview = [
+const validatingReview = [
     check('review')
         .exists({ checkFalsy: true })
         .withMessage('Review text is required'),
@@ -51,7 +51,7 @@ router.get('/users/:userId/reviews', requireAuth, async (req, res, next) => {
 });
 ///////////////////////////////////////////////////////////////////////////////
 //edit a review
-router.put('/reviews/:reviewsId', requireAuth, validateReview, async (req, res, next) => {
+router.put('/reviews/:reviewsId', requireAuth, validatingReview, async (req, res, next) => {
     const reviewId = req.params.reviewId;
     const editReview = await Review.findByPk(reviewId);
     const { review, stars } = req.body;
