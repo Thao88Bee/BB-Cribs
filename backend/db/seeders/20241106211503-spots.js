@@ -22,7 +22,8 @@ module.exports = {
         lng: -122.4730327,
         name: "App Academy",
         description: "Place where web developers are created",
-        price: 123
+        price: 123,
+        avgRating: 3
       },
       {
         ownerId: 2,
@@ -34,7 +35,8 @@ module.exports = {
         lng: -97.7430608,
         name: "Code Camp",
         description: "Immersive coding bootcamp for aspiring developers",
-        price: 499
+        price: 499,
+        avgRating: 2
       },
       {
         ownerId: 3,
@@ -46,7 +48,8 @@ module.exports = {
         lng: -122.0838,
         name: "Tech Innovators Hub",
         description: "A collaborative space for tech entrepreneurs and developers",
-        price: 350
+        price: 350,
+        avgRating: 3
       },
       {
         ownerId: 1,
@@ -58,7 +61,8 @@ module.exports = {
         lng: -74.005974,
         name: "DevWorks Inc.",
         description: "Helping developers build the next big thing",
-        price: 150
+        price: 150,
+        avgRating: 5
       },
       {
         ownerId: 2,
@@ -70,7 +74,8 @@ module.exports = {
         lng: -118.243683,
         name: "LaunchPad Academy",
         description: "Accelerating the growth of the next generation of tech startups",
-        price: 275
+        price: 275,
+        avgRating: 4
       },
       {
         ownerId: 3,
@@ -82,7 +87,8 @@ module.exports = {
         lng: -87.629799,
         name: "The Coding Factory",
         description: "Hands-on training for full-stack web development",
-        price: 199
+        price: 199,
+        avgRating: 3
       },
       {
         ownerId: 1,
@@ -94,7 +100,8 @@ module.exports = {
         lng: -122.332071,
         name: "Cloud Dev Institute",
         description: "Master cloud computing and DevOps tools for the modern era",
-        price: 499
+        price: 499,
+        avgRating: 4
       }
      ]);
   },
