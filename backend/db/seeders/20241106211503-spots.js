@@ -51,7 +51,7 @@ const spots = [
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await Spot.bulkCreate(spots, { validate: true });
+    await Spot.bulkCreate(spots);
   },
 
   async down (queryInterface, Sequelize) {

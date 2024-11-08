@@ -32,7 +32,7 @@ const bookings = [
 module.exports = {
   async up (queryInterface, Sequelize) {
     try {
-      await Booking.bulkCreate(bookings, { validate: true });
+      await Booking.bulkCreate(bookings);
     } catch(err) {
       console.error(err);
       throw err;
