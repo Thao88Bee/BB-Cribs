@@ -15,7 +15,7 @@ const spotImages = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await Booking.bulkCreate(spotImages);
+    await SpotImage.bulkCreate(spotImages);
   },
 
   async down(queryInterface, Sequelize) {

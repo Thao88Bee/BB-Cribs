@@ -15,7 +15,7 @@ const reviewImages = [
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await Booking.bulkCreate(reviewImages);
+    await ReviewImage.bulkCreate(reviewImages);
   },
 
   async down(queryInterface, Sequelize) {
