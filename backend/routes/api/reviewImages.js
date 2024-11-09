@@ -8,6 +8,7 @@ const { now } = require("sequelize/lib/utils");
 
 const router = express.Router();
 
+// Delete a Review Image
 router.delete("/:reviewImageId", requireAuth, async (req, res, next) => {
     const reviewImageId = req.params.reviewImageId;
 

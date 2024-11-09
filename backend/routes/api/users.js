@@ -1,56 +1,90 @@
 const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcryptjs");
 const { setTokenCookie, requireAuth, restoreUser } = require("../../utils/auth");
 const { User,Booking } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
+const router = express.Router();
 
-// const validateSignup = [
-//   check("email")
-//     .exists({ checkFalsy: true })
-//     .isEmail()
-//     .withMessage("Please provide a valid email."),
-//   check("username")
-//     .exists({ checkFalsy: true })
-//     .isLength({ min: 4 })
-//     .withMessage("Please provide a username with at least 4 characters."),
-//   check("username").not().isEmail().withMessage("Username cannot be an email."),
-//   check("password")
-//     .exists({ checkFalsy: true })
-//     .isLength({ min: 6 })
-//     .withMessage("Password must be 6 characters or more."),
-//   handleValidationErrors,
-// ];
+// Get all Spots owned by the Current User
+router.get("/:userId/spots", requireAuth, async (req, res, next) => {
+  const userId = req.user.id;
 
+  const spots = await Spot.findAll({
+     where: {
+      ownerId: userId
+     },
+     attributes: {
+      include: [ [ sequelize.fn("ROUND", sequelize.fn("AVG",sequelize.col("Reviews.stars")), 2), "avgRating"], ]
+     },
+     include: [
+      {
+        mode: Review,
+        attributes: []
+      },
+     ],
+     group: ["Spot.id"],
+     raw :true
+  });
 
-// Sign up
-// router.post("/", validateSignup, async (req, res) => {
-//   const { firstName, lastName, email, password, username } = req.body;
-//   const hashedPassword = bcrypt.hashSync(password);
-//   const user = await User.create({
-//     firstName,
-//     lastName,
-//     email,
-//     username,
-//     hashedPassword,
-//   });
+   for(let spot of spots) {
+    const image = await SpotImage.findAll({
+      where: {
+        [Op.and]: [
+          {
+             spotId: spot.id,
+          },
+          {
+            preview: true
+          }
+        ]
+      },
+      raw: true
+    });
+     if(!image.length) {
+      spot.previewImage = null;
+     } else{
+      spot.previewImage = image[0]["url"];
+     }
+   }
+   res.json({ "Spots": spots})
+});
 
-//   const safeUser = {
-//     id: user.id,
-//     firstName: user.firstName,
-//     lastName: user.lastName,
-//     email: user.email,
-//     username: user.username,
-//   };
-
-//   await setTokenCookie(res, safeUser);
-
-//   return res.json({
-//     user: safeUser,
-//   });
-// });
+// All Reviews of current User
+router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
+  const id = req.users.userId;
+  const reviews = await Review.findAll({
+    where: {
+      userId: id,
+    },
+    raw: true,
+  });
+  for (let review of reviews) {
+    const user = await User.findOne({
+      where: {
+        id,
+      },
+      attributes: {
+        exclude: [
+          "username",
+          "hashedPassword",
+          "createdAt",
+          "updatedAt",
+          "email",
+        ],
+      },
+    });
+    review.User = user;
+    const spots = await Spot.findAll({
+      where: {
+        ownerId: id,
+      },
+      raw: true,
+    });
+  }
+  res.json({ Reviews: reviews });
+});
 
 router.get("/:userId/bookings", requireAuth, async (req, res, next) => {
   const currUser = req.user.id;

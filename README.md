@@ -1443,4 +1443,5 @@ Return spots filtered by query parameters.
       }
     }
     ```
+    
 # BB-Chill-Project

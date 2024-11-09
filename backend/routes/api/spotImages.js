@@ -7,7 +7,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 
 const router = express.Router();
 
-//Delete a Spot Image
+// Delete a Spot Image
 router.delete("/:spotImageId", requireAuth, async (req, res, next) => {
     const spotImageId = req.params.spotImageId;
 
@@ -21,8 +21,5 @@ router.delete("/:spotImageId", requireAuth, async (req, res, next) => {
         res.json({ message: "Successfully deleted" })
     }
 })
-
-
-
 
 module.exports = router;

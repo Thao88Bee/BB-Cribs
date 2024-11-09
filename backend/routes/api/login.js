@@ -18,7 +18,7 @@ const validateLogin = [
   handleValidationErrors,
 ];
 
-// Log In
+// Log In a User
 router.post("/", validateLogin, async (req, res, next) => {
   const { credential, password } = req.body;
 

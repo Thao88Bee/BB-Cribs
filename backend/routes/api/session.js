@@ -18,7 +18,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 //   handleValidationErrors,
 // ];
 
-// Restore Session User
+// Get the Current User
 router.get("/", (req, res) => {
   const { user } = req;
   if (user) {

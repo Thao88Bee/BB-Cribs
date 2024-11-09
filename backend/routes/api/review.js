@@ -21,42 +21,7 @@ const validatingReview = [
   handleValidationErrors,
 ];
 
-//All Reviews of current User
-router.get("/users/:userId/reviews", requireAuth, async (req, res, next) => {
-  const id = req.users.userId;
-  const reviews = await Review.findAll({
-    where: {
-      userId: id,
-    },
-    raw: true,
-  });
-  for (let review of reviews) {
-    const user = await User.findOne({
-      where: {
-        id,
-      },
-      attributes: {
-        exclude: [
-          "username",
-          "hashedPassword",
-          "createdAt",
-          "updatedAt",
-          "email",
-        ],
-      },
-    });
-    review.User = user;
-    const spots = await Spot.findAll({
-      where: {
-        ownerId: id,
-      },
-      raw: true,
-    });
-  }
-  res.json({ Reviews: reviews });
-});
-
-//Add an Image to a Review based on the Review's Id
+// Add an Image to a Review based on the Review's id
 router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
    const reviewId = req.params.reviewId;
    const review = await Review.findByPk(reviewId);
@@ -81,8 +46,8 @@ router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
    res.json(imageInfo)
 });
 
-//Edit a Review
-router.put("/reviews/:reviewsId", requireAuth, validatingReview, async (req, res, next) => {
+// Edit a Review
+router.put("/:reviewsId", requireAuth, validatingReview, async (req, res, next) => {
     const reviewId = req.params.reviewId;
     const editReview = await Review.findByPk(reviewId);
     const { review, stars } = req.body;
@@ -99,7 +64,7 @@ router.put("/reviews/:reviewsId", requireAuth, validatingReview, async (req, res
 );
 
 //Delete a Review
-router.delete("/reviews/:reviewsId", requireAuth, async (req, res, next) => {
+router.delete("/:reviewsId", requireAuth, async (req, res, next) => {
   const reviewId = req.params.reviewsId;
   const deleteReview = await Review.findByPk(reviewId);
 
