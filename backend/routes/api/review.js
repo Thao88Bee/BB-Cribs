@@ -85,11 +85,7 @@ router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
 
 ///////////////////////////////////////////////////////////////////////////////
 //edit a review
-router.put(
-  "/reviews/:reviewsId",
-  requireAuth,
-  validatingReview,
-  async (req, res, next) => {
+router.put("/reviews/:reviewsId", requireAuth, validatingReview, async (req, res, next) => {
     const reviewId = req.params.reviewId;
     const editReview = await Review.findByPk(reviewId);
     const { review, stars } = req.body;
@@ -120,11 +116,6 @@ router.delete("/reviews/:reviewsId", requireAuth, async (req, res, next) => {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
 
 
 module.exports = router;
