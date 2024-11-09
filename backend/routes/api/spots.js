@@ -159,7 +159,15 @@ router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
 
 // Get Booking From SpotId
 router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
+  const { user } = req;
+  const spotId = req.params.spotId;
 
+  const spot = await Spot.findByPk(spotId);
+  const booking = await Booking.findAll({
+    where: { spotId: spotId }
+  })
+
+  res.json({Booking: booking});
 })
 
 //Delete a Spot
