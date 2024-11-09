@@ -16,7 +16,7 @@ module.exports = {
           autoIncrement: true,
           primaryKey: true,
           type: Sequelize.INTEGER,
-          references: { model: "Spot" },
+          references: { model: "Spots" },
           onDelete: "CASCADE",
         },
         url: {
