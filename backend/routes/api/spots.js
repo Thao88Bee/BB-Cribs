@@ -45,19 +45,15 @@ const spotQueryFilter = [
   check("minPrice")
   .optional()
   .exists({ checkFalse: true })
-  .isDecimal({min: 0})
+  .isFloat({min: 0})
   .withMessage("Minimum price must be greater than or equal to 0"),
   check("maxPrice")
   .optional()
   .exists({ checkFalse: true })
-  .isDecimal({min: 0})
+  .isFloat({min: 0})
   .withMessage("Maximum price must be greater than or equal to 0"),
   handleValidationErrors
 ];
-
-
-
-
 //////////////////////////////////////////////////
 //To validate a spot
 const validateSpot = [
@@ -98,6 +94,80 @@ const validatingReview = [
 ];
 
 
+
+
+////////////////////////////////////////////////////////////////////////////
+//Get all Spots
+router.get("/", spotQueryFilter, async (req, res, next) => {
+  let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+  page = parseInt(page);
+  size = parseInt(size);
+
+  if(size > 20) {
+    size = 20
+  }
+  if(page > 10) {
+    page = 10
+  }
+  let pagination = {};
+  if(page, size) {
+    pagination.limit = size;
+    pagination.offset = size * (page - 1);
+  }
+  minPrice = parseFloat(minPrice);
+  maxPrice = parseFloat(maxPrice);
+
+  const spots = await Spot.findAll({
+    attributes: {
+      include: [
+        [ sequelize.fn("ROUND", sequelize,fn("AVG", sequelize.col("Reviews.stars")),2), "avgRating"],
+      ]
+    },
+    include: [
+      {
+        model: Review,
+        attributes: []
+      },
+    ],
+    where: {
+      ...(minPrice && maxPrice ? { price: {[ Op.between]: [ minPrice, maxPrice]}}: {}),
+      ...(minPrice && !maxPrice ? { price: {[ Op.gte ]: minPrice }}: {}),
+      ...(!minPrice && maxPrice ? { price: {[ Op.lte]: maxPrice }}: {}),
+    },
+    group: ["Spot.id"],
+    raw: true,
+    ...pagination,
+  });
+   for(let spot of spots) {
+     const image = await SpotImage.findAll({
+      where: {
+        [ Op.and ]: [
+          {
+            spotId: spot.id,
+          },
+          {
+            preview: true
+          }
+        ]
+      },
+      raw: true
+     });
+     if(!image.length) {
+      spot.previewImage = null;
+     } else {
+      spot.previewImage = image[0]["url"];
+     }
+   }
+   if(page && size) {
+    res.json({
+      "Spots": spots, page, size
+    })
+   } else {
+    res.json({
+      "Spots": spots
+    })
+   }
+});
 
 /////////////////////////////////////////////////////////////////////////////
 //Get all Spots owned by the Current User
