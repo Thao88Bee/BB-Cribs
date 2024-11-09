@@ -10,15 +10,15 @@ if (process.env.NODE_ENV === "production") {
 
 const reviewImages = [
   {
-    url: "url image",
+    url: "image url",
     reviewId: 1,
   },
   {
-    url: "url image",
+    url: "image url",
     reviewId: 2,
   },
   {
-    url: "url image",
+    url: "image url",
     reviewId: 3,
   },
 ];
