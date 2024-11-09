@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth.js");
-const { User, Spot, Review } = require("../../db/models");
+const { User, Spot, Review, ReviewImage, SpotImage } = require("../../db/models");
 const { Op } = require("sequelize");
 const { route } = require("./session.js");
 const { check } = require("express-validator");
@@ -55,6 +55,34 @@ router.get("/users/:userId/reviews", requireAuth, async (req, res, next) => {
   }
   res.json({ Reviews: reviews });
 });
+////////////////////////////////////////////////////////////////////////////////////
+//Add an Image to a Review based on the Review's id
+router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
+   const reviewId = req.params.reviewId;
+   const review = await Review.findByPk(reviewId);
+   const findReviewImage = await ReviewImage.findAll({
+    where: {
+      reviewId
+    }
+   });
+
+   if(findReviewImage.length === 10) {
+    return res.status(403).json({
+      "message": "Maximum number of images for this resource was reached",
+      "statusCode": 403
+    })
+   }
+   const { url } = req.body;
+   const addImage = await ReviewImage.create({
+    reviewId,
+    url,
+   });
+   const imageInfo = await Review.scope("defaultScope").findByPk(addImage.id)
+   res.json(imageInfo)
+});
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //edit a review
 router.put(
@@ -92,5 +120,11 @@ router.delete("/reviews/:reviewsId", requireAuth, async (req, res, next) => {
   });
 });
 ///////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
 
 module.exports = router;
