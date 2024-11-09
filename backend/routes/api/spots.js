@@ -124,6 +124,38 @@ router.get("/:spotId/reviews", async (req, res, next) => {
   }
 });
 
+// Get all Bookings for a Spot based on the Spot's id
+router.get("/:spotId/bookings", async (req, res, next) => {
+  const spotId = req.params.spotId;
+  const { user } = req
+
+  const spot = await Spot.findByPk(spotId);
+
+  if (!spot) {
+    res.statusCode = 404;
+    res.json({ message: "Spot couldn't be found" })
+  } else if (user.id === spot.dataValues.ownerId) {
+    const booking = await Booking.findAll({
+      where: { spotId: spotId },
+      include: [{
+        model: User,
+        attributes: {
+          exclude: ["username", "hashedPassword", "email", "createdAt", "updatedAt"]
+        }
+      }]
+    })
+
+    res.json({ Booking: booking })
+  } else {
+    const booking = await Booking.findAll({
+      where: { spotId: spotId },
+      attributes: { exclude: ["id", "userId", "createdAt", "updatedAt"] }
+    })
+
+    res.json({Booking: booking})
+  }
+})
+
 // Get details of a Spot from an id
 router.get("/:spotId", async (req, res, next) => {
   const spotId = req.params.spotId;
