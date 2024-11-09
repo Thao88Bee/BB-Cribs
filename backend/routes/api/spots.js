@@ -9,6 +9,57 @@ const { route } = require("./session.js");
 
 const router = express.Router();
 
+/////////////////////////////////////////////////////////
+//Add Query Filters to Get All Spots
+const spotQueryFilter = [
+  check("page")
+  .optional()
+  .exists({ checkFalse: true })
+  .isInt({ min: 1 })
+  .withMessage("Page must be greater than or qual to 1"),
+  check("size")
+  .optional()
+  .exists({ checkFalse: true})
+  .isInt({ min: 1, max: 20 })
+  .withMessage("Size must be between 1 and 20"),
+  check("maxLat")
+  .optional()
+  .exists({ checkFalse: true })
+  .isDecimal()
+  .withMessage("Maximum latitude is invalid"),
+  check("minLat")
+  .optional()
+  .exists({ checkFalse: true })
+  .isDecimal()
+  .withMessage("Minimum latitude is invalid"),
+  check("minLng")
+  .optional()
+  .exists({ checkFalse: true })
+  .isDecimal()
+  .withMessage("Minimum longitude is invalid"),
+  check("maxLng")
+  .optional()
+  .exists({ checkFalse: true })
+  .isDecimal()
+  .withMessage("Max longitude is invalid"),
+  check("minPrice")
+  .optional()
+  .exists({ checkFalse: true })
+  .isDecimal({min: 0})
+  .withMessage("Minimum price must be greater than or equal to 0"),
+  check("maxPrice")
+  .optional()
+  .exists({ checkFalse: true })
+  .isDecimal({min: 0})
+  .withMessage("Maximum price must be greater than or equal to 0"),
+  handleValidationErrors
+];
+
+
+
+
+//////////////////////////////////////////////////
+//To validate a spot
 const validateSpot = [
   check("address")
     .exists({ checkFalsy: true })
@@ -33,7 +84,8 @@ const validateSpot = [
     .withMessage("Price per day must be a positive number"),
   handleValidationErrors,
 ];
-
+////////////////////////////////////////////////////////////////////
+//To validate a Review
 const validatingReview = [
   check("review")
     .exists({ checkFalsy: true })
