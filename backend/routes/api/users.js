@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const { setTokenCookie, requireAuth, restoreUser } = require("../../utils/auth");
-const { User,Booking } = require("../../db/models");
+const { User, Booking, Spot, SpotImage } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 
@@ -86,9 +86,22 @@ router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
   res.json({ Reviews: reviews });
 });
 
+// Get all of the Current User's Bookings
 router.get("/:userId/bookings", requireAuth, async (req, res, next) => {
-  const currUser = req.user.id;
+  const { user } = req;
 
+  const booking =  await Booking.findAll({
+    where: { userId: user.id },
+    include: [
+      {
+        model: Spot,
+        attributes: { exclude: ["description", "avgRating"] }
+      }
+    ]
+  })
+
+  res.json({ Booking: booking });
 })
+
 
 module.exports = router;

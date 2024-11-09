@@ -20,6 +20,13 @@ module.exports = (sequelize, DataTypes) => {
         }
       );
       Spot.hasMany(
+        models.SpotImage, {
+          foreignKey: "previewImage",
+          onDelete: "CASCADE",
+          hooks: true
+        }
+      );
+      Spot.hasMany(
         models.Review, {
           foreignKey: "spotId",
           onDelete: "CASCADE",
@@ -72,6 +79,10 @@ module.exports = (sequelize, DataTypes) => {
       avgRating: {
         type: DataTypes.DECIMAL,
         allowNull: true,
+      },
+      previewImage: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
     },
     {

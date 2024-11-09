@@ -16,13 +16,12 @@ module.exports = {
           autoIncrement: true,
           primaryKey: true,
           type: Sequelize.INTEGER,
+          references: { model: "Spot" },
+          onDelete: "CASCADE",
         },
         url: {
           type: Sequelize.STRING,
           allowNull: false,
-        },
-        preview: {
-          type: Sequelize.BOOLEAN,
         },
         spotId: {
           type: Sequelize.INTEGER,

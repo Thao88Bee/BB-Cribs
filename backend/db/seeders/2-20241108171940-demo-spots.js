@@ -20,6 +20,7 @@ const spots = [
     description: "Place where web developers are created",
     price: 123,
     avgRating: 3,
+    previewImage: "image url",
   },
   {
     ownerId: 2,
@@ -33,6 +34,7 @@ const spots = [
     description: "Immersive coding bootcamp for aspiring developers",
     price: 499,
     avgRating: 2,
+    previewImage: "image url",
   },
   {
     ownerId: 3,
@@ -46,6 +48,7 @@ const spots = [
     description: "A collaborative space for tech entrepreneurs and developers",
     price: 350,
     avgRating: 3,
+    previewImage: "image url",
   },
 ];
 
