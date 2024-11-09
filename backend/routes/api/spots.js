@@ -9,7 +9,6 @@ const { route } = require("./session.js");
 
 const router = express.Router();
 
-/////////////////////////////////////////////////////////
 //Add Query Filters to Get All Spots
 const spotQueryFilter = [
   check("page")
@@ -54,7 +53,7 @@ const spotQueryFilter = [
   .withMessage("Maximum price must be greater than or equal to 0"),
   handleValidationErrors
 ];
-//////////////////////////////////////////////////
+
 //To validate a spot
 const validateSpot = [
   check("address")
@@ -80,7 +79,6 @@ const validateSpot = [
     .withMessage("Price per day must be a positive number"),
   handleValidationErrors,
 ];
-////////////////////////////////////////////////////////////////////
 //To validate a Review
 const validatingReview = [
   check("review")
@@ -93,10 +91,6 @@ const validatingReview = [
   handleValidationErrors,
 ];
 
-
-
-
-////////////////////////////////////////////////////////////////////////////
 //Get all Spots
 router.get("/", spotQueryFilter, async (req, res, next) => {
   let { page, size, maxLat, minLat, minLng, maxLng, minPrice, maxPrice } = req.query;
@@ -169,7 +163,6 @@ router.get("/", spotQueryFilter, async (req, res, next) => {
    }
 });
 
-/////////////////////////////////////////////////////////////////////////////
 //Get all Spots owned by the Current User
 router.get("/users/:userId/spots", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
@@ -214,8 +207,7 @@ router.get("/users/:userId/spots", requireAuth, async (req, res, next) => {
    res.json({ "Spots": spots})
 });
 
-//////////////////////////////////////////////
-//Get details of a Spot from an id
+//Get details of a Spot from an Id
 router.get("/:spotId", async (req, res, next) => {
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId, {
@@ -252,7 +244,7 @@ router.get("/:spotId", async (req, res, next) => {
     })
    }
 });
-////////////////////////////////////////////////////////////////////////////
+
 //Create a Spot
 router.post("/", requireAuth, validateSpot, async (req, res, next) => {
   const ownerId = req.user.id;
@@ -272,9 +264,8 @@ router.post("/", requireAuth, validateSpot, async (req, res, next) => {
   });
   res.json(spot);
 });
-/////////////////////////////////////////////////////////////////////////////////////////
 
-//Add an Image to a Spot based on the Spot's id
+//Add an Image to a Spot based on the Spot's Id
 router.post("/:spotId/spotImages", requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;
   const { url, preview } = req.body;
@@ -294,7 +285,6 @@ router.post("/:spotId/spotImages", requireAuth, async (req, res, next) => {
   }
 });
 
-/////////////////////////////////////////////////////////////////////////////////////
 //Edit a Spot
 router.put("/:spotId", requireAuth, validateSpot, async (req, res, next) => {
   const spotId = req.params.spotId;
@@ -371,8 +361,8 @@ router.delete("/:spotId", requireAuth, async (req, res, next) => {
     res.json({ message: "Successfully deleted" });
   }
 });
-//////////////////////////////////////////////////////////////////////////////////
-//Get all Reviews by a Spot's id
+
+//Get all Reviews by a Spot's Id
 router.get("/:spotId/reviews", async (req, res, next) => {
   const spotId = req.params.spotId;
   const spot = await Spot.findByPk(spotId);
@@ -403,8 +393,8 @@ router.get("/:spotId/reviews", async (req, res, next) => {
     })
   }
 });
-//////////////////////////////////////////////////////////////////////////////////////////
-//Create a Review for a Spot based on the Spot's id
+
+//Create a Review for a Spot based on the Spot's Id
 router.post("/:spotId/reviews", requireAuth, validatingReview, async (req, res, next) => {
   const userId = req.user.id;
   const spotId = req.params.spotId;

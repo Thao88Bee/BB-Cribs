@@ -21,7 +21,7 @@ const validatingReview = [
   handleValidationErrors,
 ];
 
-//all reviews of current user
+//All Reviews of current User
 router.get("/users/:userId/reviews", requireAuth, async (req, res, next) => {
   const id = req.users.userId;
   const reviews = await Review.findAll({
@@ -55,8 +55,8 @@ router.get("/users/:userId/reviews", requireAuth, async (req, res, next) => {
   }
   res.json({ Reviews: reviews });
 });
-////////////////////////////////////////////////////////////////////////////////////
-//Add an Image to a Review based on the Review's id
+
+//Add an Image to a Review based on the Review's Id
 router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
    const reviewId = req.params.reviewId;
    const review = await Review.findByPk(reviewId);
@@ -81,10 +81,7 @@ router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
    res.json(imageInfo)
 });
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-//edit a review
+//Edit a Review
 router.put("/reviews/:reviewsId", requireAuth, validatingReview, async (req, res, next) => {
     const reviewId = req.params.reviewId;
     const editReview = await Review.findByPk(reviewId);
@@ -100,10 +97,8 @@ router.put("/reviews/:reviewsId", requireAuth, validatingReview, async (req, res
     res.json(editReview);
   }
 );
-//////////////////////////////////////////////////////////////////////////////////////////////////
 
-//delete a review
-
+//Delete a Review
 router.delete("/reviews/:reviewsId", requireAuth, async (req, res, next) => {
   const reviewId = req.params.reviewsId;
   const deleteReview = await Review.findByPk(reviewId);
@@ -115,7 +110,6 @@ router.delete("/reviews/:reviewsId", requireAuth, async (req, res, next) => {
     statusCode: 200,
   });
 });
-///////////////////////////////////////////////////////////////////////////////////
 
 
 module.exports = router;

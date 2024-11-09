@@ -18,21 +18,13 @@ const { restoreUser } = require("../../utils/auth.js");
 router.use(restoreUser);
 
 router.use("/session", sessionRouter);
-
 router.use("/login", login);
-
 router.use("/signup", signup);
-
 router.use("/users", usersRouter);
-
 router.use("/bookings", bookingsRouter);
-
 router.use("/spots", spotsRouter);
-
 router.use("/reviews", reviewsRouter);
-
 router.use("/reviewImages", reviewImages);
-
 router.use("/spotImages", SpotImages)
 
 router.post("/test", (req, res) => {
