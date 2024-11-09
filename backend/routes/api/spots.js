@@ -167,7 +167,18 @@ router.get("/:spotId/bookings", requireAuth, async (req, res, next) => {
     where: { spotId: spotId }
   })
 
-  res.json({Booking: booking});
+  console.log(user.id);
+
+
+  if (!spot) {
+    res.statusCode = 404;
+    res.json({ message: "Spot couldn't be found" })
+  } else if (user.id) {
+    res.json( "need fixing" )
+  } else {
+    res.json({ Booking: booking })
+  }
+
 })
 
 //Delete a Spot
