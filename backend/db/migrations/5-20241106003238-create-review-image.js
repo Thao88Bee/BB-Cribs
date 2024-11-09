@@ -25,6 +25,7 @@ module.exports = {
           allowNull: false,
           references: {
             model: "Reviews",
+            key: "id"
           },
           onDelete: "CASCADE",
         },
