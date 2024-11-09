@@ -9,7 +9,18 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const reviewImages = [
-
+  {
+    url: "url image",
+    reviewId: 1,
+  },
+  {
+    url: "url image",
+    reviewId: 2,
+  },
+  {
+    url: "url image",
+    reviewId: 3,
+  },
 ];
 
 /** @type {import('sequelize-cli').Migration} */
