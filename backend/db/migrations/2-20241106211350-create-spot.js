@@ -67,11 +67,6 @@ module.exports = {
         previewImage: {
           type: Sequelize.STRING,
           allowNull: false,
-          references: { 
-            model: "SpotImages", 
-            key: "id",
-          },
-          onDelete: "CASCADE",
         },
         createdAt: {
           allowNull: false,
