@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const spotimage = require("./spotimage");
 
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
@@ -21,12 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       Spot.hasMany(models.SpotImage, {
         foreignKey: "spotId",
         onDelete: "CASCADE",
-        hooks: true,
       });
       Spot.hasMany(models.Review, {
         foreignKey: "spotId",
         onDelete: "CASCADE",
-        hooks: true,
+      });
+      Spot.belongsTo(models.SpotImage, {
+        foreignKey: "previewImage",
+        onDelete: "CASCADE",
       });
     }
   }

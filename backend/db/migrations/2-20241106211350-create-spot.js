@@ -64,6 +64,10 @@ module.exports = {
         previewImage: {
           type: Sequelize.STRING,
           allowNull: false,
+          references: {
+            model: "SpotImages",
+            key: "id",
+          },
         },
         createdAt: {
           allowNull: false,
