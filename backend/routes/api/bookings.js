@@ -8,6 +8,7 @@ const { now } = require("sequelize/lib/utils");
 
 const router = express.Router();
 
+// Edit a Booking
 router.put("/:bookingId", requireAuth, async (req, res, next) => {
   const bookingId = req.params.bookingId;
   const data = req.body;
