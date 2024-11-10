@@ -30,6 +30,10 @@ module.exports = {
           },
           onDelete: "CASCADE",
         },
+        previewImage: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
         createdAt: {
           allowNull: false,
           type: Sequelize.DATE,
