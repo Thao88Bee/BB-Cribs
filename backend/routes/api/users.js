@@ -53,7 +53,7 @@ router.get("/:userId/spots", requireAuth, async (req, res, next) => {
 
 // All Reviews of current User
 router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
-  const id = req.users.userId;
+  const id = req.params.userId;
   const reviews = await Review.findAll({
     where: {
       userId: id,
