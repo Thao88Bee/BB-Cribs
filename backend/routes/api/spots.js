@@ -251,8 +251,7 @@ router.get("/", spotQueryFilter, async (req, res, next) => {
         [
           sequelize.fn(
             "ROUND",
-            sequelize.
-            fn("AVG", sequelize.col("Reviews.stars")),
+            sequelize.fn("AVG", sequelize.col("Reviews.stars")),
             2
           ),
           "avgRating",
