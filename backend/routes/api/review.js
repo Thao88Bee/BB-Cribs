@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth.js");
-const { User, Spot, Review, ReviewImage, SpotImage } = require("../../db/models");
+const { User, Spot, Review, ReviewImage, sequelize, SpotImage } = require("../../db/models");
 const { Op } = require("sequelize");
 const { route } = require("./session.js");
 const { check } = require("express-validator");
