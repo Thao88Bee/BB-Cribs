@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const { Op, DATE, json } = require("sequelize");
 const { requireAuth } = require("../../utils/auth");
 
-const { Booking, User } = require("../../db/models");
+const { Booking, User, Spot , SpotImage } = require("../../db/models");
 const { now } = require("sequelize/lib/utils");
 
 const router = express.Router();

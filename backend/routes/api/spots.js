@@ -134,7 +134,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
         },
       ],
     });
-    res.json({ Reviews: reviews });
+    res.json({ "Reviews": reviews });
   } else {
     res.status(404).json({
       message: "Spot couldn't be found :(",
@@ -238,7 +238,7 @@ router.get("/", spotQueryFilter, async (req, res, next) => {
     page = 10;
   }
   let pagination = {};
-  if ((page, size)) {
+  if (page, size) {
     pagination.limit = size;
     pagination.offset = size * (page - 1);
   }
@@ -298,13 +298,13 @@ router.get("/", spotQueryFilter, async (req, res, next) => {
   }
   if (page && size) {
     res.json({
-      Spots: spots,
+      "Spots": spots,
       page,
       size,
     });
   } else {
     res.json({
-      Spots: spots,
+      "Spots": spots,
     });
   }
 });
@@ -359,11 +359,11 @@ router.post(
 // Add an Image to a Spot based on the Spot's id
 router.post("/:spotId/spotImages", requireAuth, async (req, res, next) => {
   const spotId = req.params.spotId;
-  const { url, previewImage } = req.body;
+  const { url, preview } = req.body;
   const spot = await Spot.findByPk(spotId);
 
   if (spot) {
-    const image = await SpotImage.create({ url, spotId, previewImage });
+    const image = await SpotImage.create({ url, spotId, preview });
 
     const imageId = image.id;
     const imageInformation = await SpotImage.scope("defaultScope").findByPk(
