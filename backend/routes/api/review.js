@@ -31,6 +31,11 @@ router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
     }
    });
 
+   if (!review) {
+    res.statusCode = 404;
+    res.json({ message: "Review couldn't be found" })
+   }
+
    if(findReviewImage.length === 10) {
     return res.status(403).json({
       "message": "Maximum number of images for this resource was reached",
@@ -43,7 +48,7 @@ router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
     url,
    });
    const imageInfo = await Review.scope("defaultScope").findByPk(addImage.id)
-   res.json(imageInfo)
+   res.json(findReviewImage)
 });
 
 // Edit a Review
