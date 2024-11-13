@@ -32,12 +32,7 @@ router.delete("/:bookingId", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
   const bookingId = req.params.bookingId;
 
-  const booking = await Booking.findOne({
-    where: {
-      id: bookingId,
-      userId: userId,
-    },
-  });
+  const booking = await Booking.findByPk(bookingId);
 
   if (!booking) {
     res.statusCode = 404;
