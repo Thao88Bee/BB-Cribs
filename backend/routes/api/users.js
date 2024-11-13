@@ -1,9 +1,11 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const { setTokenCookie, requireAuth, restoreUser } = require("../../utils/auth");
-const { User, Booking, Spot, SpotImage, Review, sequelize } = require("../../db/models");
+const { User, Booking, Spot, SpotImage, Review } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
+const { Op, Sequelize, ValidationError, DATE } = require("sequelize");
+
 
 const router = express.Router();
 
@@ -15,15 +17,15 @@ router.get("/:userId/spots", requireAuth, async (req, res, next) => {
      where: {
       ownerId: userId
      },
-     attributes: {
-      include: [ [ sequelize.fn("ROUND", sequelize.fn("AVG",sequelize.col("Reviews.stars")), 2), "avgRating"], ]
-     },
-     include: [
-      {
-        mode: Review,
-        attributes: []
-      },
-     ],
+    //  attributes: {
+    //   include: [ [ sequelize.fn("ROUND", sequelize.fn("AVG",sequelize.col("Reviews.stars")), 2), "avgRating"], ]
+    //  },
+    //  include: [
+    //   {
+    //     mode: Review,
+    //     attributes: []
+    //   },
+    //  ],
      group: ["Spot.id"],
      raw :true
   });
