@@ -31,8 +31,8 @@ module.exports = {
           onDelete: "CASCADE",
         },
         previewImage: {
-          type: Sequelize.STRING,
-          allowNull: false,
+          type: Sequelize.BOOLEAN,
+          allowNull: true,
         },
         createdAt: {
           allowNull: false,
