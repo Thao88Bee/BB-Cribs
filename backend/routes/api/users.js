@@ -1,11 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const { setTokenCookie, requireAuth, restoreUser } = require("../../utils/auth");
-<<<<<<< HEAD
 const { User, Booking, Spot, SpotImage, Review, ReviewImage, sequelize} = require("../../db/models");
-=======
-const { User, Booking, Spot, SpotImage, Review, ReviewImage } = require("../../db/models");
->>>>>>> 28fc47b9fa0c7796f2c0852179dd5185d873a6b4
+// const { User, Booking, Spot, SpotImage, Review, ReviewImage } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Op, Sequelize, ValidationError, DATE } = require("sequelize");
@@ -89,7 +86,7 @@ router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
       raw: true,
     });
     for(let spot of spots ) {
-      const spotImages = await findAll({
+      const spotImages = await SpotImage.findAll({
         where: {
           [Op.and]: [
             {
