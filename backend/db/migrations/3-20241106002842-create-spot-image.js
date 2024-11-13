@@ -30,7 +30,7 @@ module.exports = {
           },
           onDelete: "CASCADE",
         },
-        previewImage: {
+        preview: {
           type: Sequelize.BOOLEAN,
           allowNull: true,
         },

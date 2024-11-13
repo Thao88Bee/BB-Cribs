@@ -12,17 +12,17 @@ const spotImages = [
   {
     url: "image url",
     spotId: 1,
-    previewImage: true,
+    preview: true,
   },
   {
     url: "image url",
     spotId: 2,
-    previewImage: false,
+    preview: false,
   },
   {
     url: "image url",
     spotId: 3,
-    previewImage: true,
+    preview: true,
   },
 ];
 
