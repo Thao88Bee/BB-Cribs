@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
 const { setTokenCookie, requireAuth, restoreUser } = require("../../utils/auth");
-const { User, Booking, Spot, SpotImage, Review } = require("../../db/models");
+const { User, Booking, Spot, SpotImage, Review, ReviewImage, sequelize} = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Op, Sequelize, ValidationError, DATE } = require("sequelize");
@@ -84,6 +84,40 @@ router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
       },
       raw: true,
     });
+    for(let spot of spots ) {
+      const spotImages = await findAll({
+        where: {
+          [Op.and]: [
+            {
+              spotId: spot.id,
+            },
+            {
+              preview: true
+            }
+          ]
+        },
+        attributes: {
+          exclude: ["id", "preview"]
+        },
+        raw:true
+      });
+      if(!spotImages.length) {
+        spot.previewImage = null
+      } else {
+        spot.previewImage = spotImages[0]["url"];
+      }
+    }
+    review.Spot = spots;
+    const images = await ReviewImage.findAll({
+      where: {
+        reviewId: review.id
+      },
+      attributes: {
+        exclude: ["reviewId", "createdAt", "updatedAt"]
+      },
+      raw: true
+    });
+    review.ReviewImages = images
   }
   res.json({ Reviews: reviews });
 });
