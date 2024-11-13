@@ -53,7 +53,7 @@ router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
 
 // Edit a Review
 router.put("/:reviewsId", requireAuth, validatingReview, async (req, res, next) => {
-    const reviewId = req.params.reviewId;
+    const reviewId = req.params.reviewsId;
     const editReview = await Review.findByPk(reviewId);
     const { review, stars } = req.body;
 
