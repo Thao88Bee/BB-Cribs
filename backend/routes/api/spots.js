@@ -362,7 +362,7 @@ router.post("/:spotId/spotImages", requireAuth, async (req, res, next) => {
   const spot = await Spot.findByPk(spotId);
 
   if (spot) {
-    const image = await SpotImage.create({ url, spotId, preview });
+    const image = await SpotImage.create({ url, preview, spotId });
 
     const imageId = image.id;
     const imageInformation = await SpotImage.scope("defaultScope").findByPk(
