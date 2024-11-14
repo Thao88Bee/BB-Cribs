@@ -134,7 +134,7 @@ router.get("/:spotId/reviews", async (req, res, next) => {
         },
       ],
     });
-    res.json({ "Reviews": reviews });
+    res.json({ Reviews: reviews });
   } else {
     res.status(404).json({
       message: "Spot couldn't be found :(",
@@ -238,7 +238,7 @@ router.get("/", spotQueryFilter, async (req, res, next) => {
     page = 10;
   }
   let pagination = {};
-  if (page, size) {
+  if ((page, size)) {
     pagination.limit = size;
     pagination.offset = size * (page - 1);
   }
@@ -297,13 +297,13 @@ router.get("/", spotQueryFilter, async (req, res, next) => {
   }
   if (page && size) {
     res.json({
-      "Spots": spots,
+      Spots: spots,
       page,
       size,
     });
   } else {
     res.json({
-      "Spots": spots,
+      Spots: spots,
     });
   }
 });
@@ -379,46 +379,66 @@ router.post("/:spotId/spotImages", requireAuth, async (req, res, next) => {
 
 // Create a Booking from a Spot based on the Spot's id
 router.post("/:spotId/bookings", async (req, res, next) => {
+  const userId = req.user.id;
   const spotId = req.params.spotId;
-  const data = req.body;
+  const { startDate, endDate } = req.body;
 
   const spot = await Spot.findByPk(spotId);
-
-  const booking = await Booking.findOne({
-    where: { spotId: spotId },
-  });
-
-  const userId = booking.dataValues.userId;
-  const now = new Date();
-  const dataStartDate = new Date(data.startDate);
-  const dataEndDate = new Date(data.endDate);
-  const bookingStartDate = new Date(booking.dataValues.startDate);
-  const bookingEndDate = new Date(booking.dataValues.endDate);
 
   if (!spot) {
     res.statusCode = 404;
     res.json({ message: "Spot couldn't be found" });
-  } else if (dataStartDate < now || dataEndDate < dataStartDate) {
+  }
+
+  const booking = await Booking.findOne({
+    where: { spotId },
+  });
+
+  const allBookingDates = await Booking.findAll({
+    where: { spotId },
+    attributes: ["startDate", "endDate"],
+  });
+
+  const bookingDates = allBookingDates.flatMap((booking) => [
+    new Date(booking.startDate).toISOString().split("T")[0],
+    new Date(booking.endDate).toISOString().split("T")[0],
+  ]);
+
+  const currDate = new Date();
+
+  if (
+    new Date(startDate) < currDate ||
+    new Date(endDate) <= new Date(startDate)
+  ) {
     res.statusCode = 400;
-    res.json({ message: "Bad Request" });
+    res.json({
+      message: "Bad Request",
+      errors: {
+        startDate: "startDate cannot be in the past",
+        endDate: "endDate cannot be on or before startDate",
+      },
+    });
   } else if (
-    (dataStartDate >= bookingStartDate && dataStartDate <= bookingEndDate) ||
-    (dataEndDate >= bookingStartDate && dataEndDate <= bookingEndDate)
+    bookingDates.includes(startDate) ||
+    bookingDates.includes(endDate)
   ) {
     res.statusCode = 403;
     res.json({
       message: "Sorry, this spot is already booked for the specified dates",
+      error: {
+        startDate: "Start date conflicts with an existing booking",
+        endDate: "End date conflicts with an existing booking",
+      },
     });
   } else {
-    const { startDate, endDate } = req.body;
     const newBooking = await Booking.create({
       spotId,
       userId,
       startDate,
       endDate,
     });
+
     res.json(newBooking);
-    res.json(booking);
   }
 });
 
