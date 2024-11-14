@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const { Op, DATE, json } = require("sequelize");
 const { requireAuth } = require("../../utils/auth");
 
-const { Booking, User, Spot , SpotImage } = require("../../db/models");
+const { Booking, User, Spot, SpotImage } = require("../../db/models");
 const { now } = require("sequelize/lib/utils");
 
 const router = express.Router();
@@ -34,28 +34,40 @@ router.put("/:bookingId", requireAuth, async (req, res, next) => {
     res.json({ message: "Booking couldn't be found" });
   } else if (currDate >= bookingEndDate) {
     res.statusCode = 403;
-    res.json({ message: "Past bookings can't be modified" })
-  } else if (new Date(startDate) <= currDate || new Date(endDate) <= new Date(startDate)) {
+    res.json({ message: "Past bookings can't be modified" });
+  } else if (
+    new Date(startDate) <= currDate ||
+    new Date(endDate) <= new Date(startDate)
+  ) {
     res.statusCode = 400;
     res.json({
       message: "Bad Request",
       errors: {
-        "startDate": "startDate cannot be in the past",
-        "endDate": "endDate cannot be on or before startDate"
-      }
-    })
-  } else if (bookingDates.includes(startDate) || bookingDates.includes(endDate)) {
+        startDate: "startDate cannot be in the past",
+        endDate: "endDate cannot be on or before startDate",
+      },
+    });
+  } else if (
+    bookingDates.includes(startDate) ||
+    bookingDates.includes(endDate)
+  ) {
     res.statusCode = 403;
     res.json({
       message: "Sorry, this spot is already booked for the specified dates",
       error: {
-        "startDate": "Start date conflicts with an existing booking",
-        "endDate": "End date conflicts with an existing booking"
-      }
-    })
-  }
+        startDate: "Start date conflicts with an existing booking",
+        endDate: "End date conflicts with an existing booking",
+      },
+    });
+  } else {
+    await booking.update({
+      startDate: startDate,
+      endDate: endDate,
+    });
 
-  res.json(booking);
+    await booking.save();
+    res.json(booking);
+  }
 });
 
 // Delete a Booking
