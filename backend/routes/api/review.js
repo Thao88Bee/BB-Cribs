@@ -1,7 +1,14 @@
 const express = require("express");
 
 const { setTokenCookie, requireAuth } = require("../../utils/auth.js");
-const { User, Spot, Review, ReviewImage, sequelize, SpotImage } = require("../../db/models");
+const {
+  User,
+  Spot,
+  Review,
+  ReviewImage,
+  sequelize,
+  SpotImage,
+} = require("../../db/models");
 const { Op } = require("sequelize");
 const { route } = require("./session.js");
 const { check } = require("express-validator");
@@ -23,36 +30,40 @@ const validatingReview = [
 
 // Add an Image to a Review based on the Review's id
 router.post("/:reviewId/reviewImages", requireAuth, async (req, res, next) => {
-   const reviewId = req.params.reviewId;
-   const review = await Review.findByPk(reviewId);
-   const findReviewImage = await ReviewImage.findAll({
+  const reviewId = req.params.reviewId;
+  const review = await Review.findByPk(reviewId);
+  const findReviewImage = await ReviewImage.findAll({
     where: {
-      reviewId
-    }
-   });
+      reviewId,
+    },
+  });
 
-   if (!review) {
+  if (!review) {
     res.statusCode = 404;
-    res.json({ message: "Review couldn't be found" })
-   }
+    res.json({ message: "Review couldn't be found" });
+  }
 
-   if(findReviewImage.length === 10) {
+  if (findReviewImage.length === 10) {
     return res.status(403).json({
-      "message": "Maximum number of images for this resource was reached",
-      "statusCode": 403
-    })
-   }
-   const { url } = req.body;
-   const addImage = await ReviewImage.create({
+      message: "Maximum number of images for this resource was reached",
+      statusCode: 403,
+    });
+  }
+  const { url } = req.body;
+  const addImage = await ReviewImage.create({
     reviewId,
     url,
-   });
-   const imageInfo = await Review.scope("defaultScope").findByPk(addImage.id)
-   res.json(findReviewImage)
+  });
+  const imageInfo = await Review.scope("defaultScope").findByPk(addImage.id);
+  res.json(findReviewImage);
 });
 
 // Edit a Review
-router.put("/:reviewsId", requireAuth, validatingReview, async (req, res, next) => {
+router.put(
+  "/:reviewsId",
+  requireAuth,
+  validatingReview,
+  async (req, res, next) => {
     const reviewId = req.params.reviewsId;
     const editReview = await Review.findByPk(reviewId);
     const { review, stars } = req.body;
@@ -75,7 +86,7 @@ router.delete("/:reviewsId", requireAuth, async (req, res, next) => {
 
   if (!deleteReview) {
     res.statusCode = 404;
-    res.json({ message: "Review couldn't be found" })
+    res.json({ message: "Review couldn't be found" });
   }
 
   await deleteReview.destroy();
@@ -85,6 +96,5 @@ router.delete("/:reviewsId", requireAuth, async (req, res, next) => {
     statusCode: 200,
   });
 });
-
 
 module.exports = router;

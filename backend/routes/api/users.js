@@ -1,12 +1,23 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const { setTokenCookie, requireAuth, restoreUser } = require("../../utils/auth");
-const { User, Booking, Spot, SpotImage, Review, ReviewImage, sequelize} = require("../../db/models");
+const {
+  setTokenCookie,
+  requireAuth,
+  restoreUser,
+} = require("../../utils/auth");
+const {
+  User,
+  Booking,
+  Spot,
+  SpotImage,
+  Review,
+  ReviewImage,
+  sequelize,
+} = require("../../db/models");
 // const { User, Booking, Spot, SpotImage, Review, ReviewImage } = require("../../db/models");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { Op, Sequelize, ValidationError, DATE } = require("sequelize");
-
 
 const router = express.Router();
 
@@ -15,9 +26,9 @@ router.get("/:userId/spots", requireAuth, async (req, res, next) => {
   const userId = req.user.id;
 
   const spots = await Spot.findAll({
-     where: {
-      ownerId: userId
-     },
+    where: {
+      ownerId: userId,
+    },
     //  attributes: {
     //   include: [ [ sequelize.fn("ROUND", sequelize.fn("AVG",sequelize.col("Reviews.stars")), 2), "avgRating"], ]
     //  },
@@ -27,31 +38,31 @@ router.get("/:userId/spots", requireAuth, async (req, res, next) => {
     //     attributes: []
     //   },
     //  ],
-     group: ["Spot.id"],
-     raw :true
+    group: ["Spot.id"],
+    raw: true,
   });
 
-   for(let spot of spots) {
+  for (let spot of spots) {
     const image = await SpotImage.findAll({
       where: {
         [Op.and]: [
           {
-             spotId: spot.id,
+            spotId: spot.id,
           },
           {
-            preview: true
-          }
-        ]
+            preview: true,
+          },
+        ],
       },
-      raw: true
+      raw: true,
     });
-     if(!image.length) {
+    if (!image.length) {
       spot.previewImage = null;
-     } else{
+    } else {
       spot.previewImage = image[0]["url"];
-     }
-   }
-   res.json({ "Spots": spots})
+    }
+  }
+  res.json({ Spots: spots });
 });
 
 // All Reviews of current User
@@ -85,7 +96,7 @@ router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
       },
       raw: true,
     });
-    for(let spot of spots ) {
+    for (let spot of spots) {
       const spotImages = await SpotImage.findAll({
         where: {
           [Op.and]: [
@@ -93,17 +104,17 @@ router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
               spotId: spot.id,
             },
             {
-              preview: true
-            }
-          ]
+              preview: true,
+            },
+          ],
         },
         attributes: {
-          exclude: ["id", "preview"]
+          exclude: ["id", "preview"],
         },
-        raw:true
+        raw: true,
       });
-      if(!spotImages.length) {
-        spot.previewImage = null
+      if (!spotImages.length) {
+        spot.previewImage = null;
       } else {
         spot.previewImage = spotImages[0]["url"];
       }
@@ -111,14 +122,14 @@ router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
     review.Spot = spots;
     const images = await ReviewImage.findAll({
       where: {
-        reviewId: review.id
+        reviewId: review.id,
       },
       attributes: {
-        exclude: ["reviewId", "createdAt", "updatedAt"]
+        exclude: ["reviewId", "createdAt", "updatedAt"],
       },
-      raw: true
+      raw: true,
     });
-    review.ReviewImages = images
+    review.ReviewImages = images;
   }
   res.json({ Reviews: reviews });
 });
@@ -127,18 +138,17 @@ router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
 router.get("/:userId/bookings", requireAuth, async (req, res, next) => {
   const { user } = req;
 
-  const bookings =  await Booking.findAll({
+  const bookings = await Booking.findAll({
     where: { userId: user.id },
     include: [
       {
         model: Spot,
-        attributes: { exclude: ["description", "avgRating"] }
-      }
-    ]
-  })
+        attributes: { exclude: ["description", "avgRating"] },
+      },
+    ],
+  });
 
   res.json({ Booking: bookings });
-})
-
+});
 
 module.exports = router;
