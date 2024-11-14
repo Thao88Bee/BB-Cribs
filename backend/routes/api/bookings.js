@@ -10,17 +10,17 @@ const router = express.Router();
 
 // Edit a Booking
 router.put("/:bookingId", requireAuth, async (req, res, next) => {
-  const bookingId = req.params.bookingId;
+  const id = req.params.bookingId;
   const { startDate, endDate } = req.body;
 
-  const booking = await Booking.findByPk(bookingId);
+  const booking = await Booking.findByPk(id);
 
   const bookingStartDate = new Date(booking.startDate);
   const bookingEndDate = new Date(booking.endDate);
   const currDate = new Date();
 
   const allBookingDates = await Booking.findAll({
-    where: { id: bookingId },
+    where: { id },
     attributes: ["startDate", "endDate"],
   });
 
