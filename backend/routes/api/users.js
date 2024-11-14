@@ -127,7 +127,7 @@ router.get("/:userId/reviews", requireAuth, async (req, res, next) => {
 router.get("/:userId/bookings", requireAuth, async (req, res, next) => {
   const { user } = req;
 
-  const booking =  await Booking.findAll({
+  const bookings =  await Booking.findAll({
     where: { userId: user.id },
     include: [
       {
@@ -137,7 +137,7 @@ router.get("/:userId/bookings", requireAuth, async (req, res, next) => {
     ]
   })
 
-  res.json({ Booking: booking });
+  res.json({ Booking: bookings });
 })
 
 
