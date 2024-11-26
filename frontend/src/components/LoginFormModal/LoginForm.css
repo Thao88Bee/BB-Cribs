@@ -1,3 +1,26 @@
-.navBtn {
+#loginHeader {
+    text-align: center;
+    color: rgb(255, 0, 0);
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loginLabel {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 10px 0;
+}
+
+.loginBtn {
     cursor: pointer;
+    margin: 10px 0 0 0;
+    padding: 10px 40px;
+    color: rgb(255, 0, 0);
+    background-color: rgb(210, 210, 210);
+    border-radius: 5px;
+    box-shadow: 4px 4px 8px black;
   }
