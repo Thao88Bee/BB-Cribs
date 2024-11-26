@@ -1,3 +1,25 @@
+#navBar {
+  background-color: #000000;
+  margin: 0px;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+li {
+  color: white;
+  list-style: none;
+}
+
+.Link {
+  color: red;
+  text-decoration: none;
+}
+
 .hidden {
   display: none;
+}
+
+.navBtn {
+  cursor: pointer;
 }

@@ -42,7 +42,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={toggleMenu}>
+      <button className="navBtn" onClick={toggleMenu}>
         <FaUserCircle />
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -54,7 +54,10 @@ function ProfileButton({ user }) {
             </li>
             <li>{user.email}</li>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <br />
+              <button className="navBtn" onClick={logout}>
+                Log Out
+              </button>
             </li>
           </>
         ) : (
@@ -66,6 +69,7 @@ function ProfileButton({ user }) {
                 modalComponent={<LoginFormModal />}
               />
             </li>
+            <br />
             <li>
               <OpenModalButton
                 buttonText="Sign Up"
