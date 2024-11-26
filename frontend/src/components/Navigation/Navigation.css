@@ -1,7 +1,7 @@
 #navBar {
   background-color: #000000;
   margin: 0px;
-  padding: 40px 20px;
+  padding: 30px 20px;
   display: flex;
   justify-content: space-between;
 }
