@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import bblogo from "../../../public/favicon.ico"
+import bblogo from "../../../public/favicon.ico";
 
 function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
   return (
     <ul id="navBar">
       <Link to="/">
-      <img src={bblogo} alt="BB Cribs Logo" />
+        <img src={bblogo} alt="BB Cribs Logo" />
       </Link>
       {isLoaded && (
         <li>
