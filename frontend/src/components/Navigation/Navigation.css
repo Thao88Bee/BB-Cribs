@@ -1,13 +1,13 @@
 #navBar {
   background-color: #000000;
   margin: 0px;
-  padding: 30px 20px;
+  padding: 30px 40px 30px 30px;
   display: flex;
   justify-content: space-between;
 }
 
 li {
-  color: white;
+  color: rgb(255, 255, 255);
   list-style: none;
   align-content: center;
 }
@@ -17,10 +17,41 @@ li {
   text-decoration: none;
 }
 
+.profile-dropdown {
+  background-color: red;
+  padding: 25px 15px;
+  border-radius: 10px;
+  position: absolute;
+  top: 5rem;
+  right: 1.5rem;
+  border: 3px solid black;
+  text-align: center;
+}
+
 .hidden {
   display: none;
 }
 
 .navBtn {
   cursor: pointer;
+}
+
+.userBtn {
+  border: none;
+  padding: 7px 20px;
+  border-radius: 5px;
+}
+
+.loginSigninBtn {
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  padding: 5px;
+}
+
+.logoutBtn {
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  padding: 5px;
 }
