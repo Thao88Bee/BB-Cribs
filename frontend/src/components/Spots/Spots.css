@@ -3,3 +3,13 @@
     grid-template-columns: 1fr 1fr 1fr;
     margin: 90px;
 }
+
+#spotImage{
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 20px 20px 20px black;
+}
+
+#spotImage:hover {
+    height: 210px;
+}
