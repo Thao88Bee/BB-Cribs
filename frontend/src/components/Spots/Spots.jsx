@@ -16,7 +16,8 @@ function Spots() {
     <>
       <ul id="spots">
         {spots?.map(({ id, city, state, name, price }) => (
-          <li key={id}>
+          <div key={id}>
+          <li>
             <Link to={`/spots/${id}`}>
             {name}
             <br />
@@ -26,6 +27,7 @@ function Spots() {
             <button>reserve</button>
             </Link>
           </li>
+          </div>
         ))}
       </ul>
     </>
