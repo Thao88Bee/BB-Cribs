@@ -8,7 +8,7 @@ const SingleSpot = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const singleSpot = useSelector((state) =>
-    state.spot.allSpots?.find((spot) => spot.id === Number(id))
+    state.spot.Spots?.find((spot) => spot.id === Number(id))
   );
 
   useEffect(() => {
