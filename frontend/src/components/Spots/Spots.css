@@ -1,15 +1,15 @@
 #spots {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    margin: 90px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin: 90px;
 }
 
-#spotsImage{
-    height: 200px;
-    border-radius: 10px;
-    box-shadow: 20px 20px 20px black;
+#spotsImage {
+  height: 200px;
+  border-radius: 10px;
+  box-shadow: 20px 20px 20px black;
 }
 
 #spotsImage:hover {
-    height: 210px;
+  height: 210px;
 }

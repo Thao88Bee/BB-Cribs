@@ -17,18 +17,38 @@ const SingleSpot = () => {
 
   return (
     <>
-    <div id="singleSpot">
-      <h1 id="singleSpotHeader">{singleSpot?.name}</h1>
-      <p>
-        {singleSpot?.city}, {singleSpot?.state}
-      </p>
-      <div id="singleSpotImages">
-          <img className="spotImage one" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
-          <img className="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
-          <img className="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
-          <img className="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
-          <img className="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
-      </div>
+      <div id="singleSpot">
+        <h1 id="singleSpotHeader">{singleSpot?.name}</h1>
+        <p>
+          {singleSpot?.city}, {singleSpot?.state}
+        </p>
+        <div id="singleSpotImages">
+          <img
+            className="spotImage one"
+            src="https://images6.alphacoders.com/105/1058802.jpg"
+            alt=""
+          />
+          <img
+            className="spotImage"
+            src="https://images6.alphacoders.com/105/1058802.jpg"
+            alt=""
+          />
+          <img
+            className="spotImage"
+            src="https://images6.alphacoders.com/105/1058802.jpg"
+            alt=""
+          />
+          <img
+            className="spotImage"
+            src="https://images6.alphacoders.com/105/1058802.jpg"
+            alt=""
+          />
+          <img
+            className="spotImage"
+            src="https://images6.alphacoders.com/105/1058802.jpg"
+            alt=""
+          />
+        </div>
         <p>${singleSpot?.price} per night</p>
         <p>Average Rating: {singleSpot?.avgRating}</p>
         <button>Reserve</button>
