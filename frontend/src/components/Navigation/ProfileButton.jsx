@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { FaHouseUser } from "react-icons/fa";
 import * as sessionActions from "../../store/session";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
@@ -7,6 +8,7 @@ import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal";
 
 function ProfileButton({ user }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
@@ -36,6 +38,13 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
     closeMenu();
+    navigate("/");
+  };
+
+  const move = (e) => {
+    e.preventDefault();
+    closeMenu();
+    navigate("/spots/add");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -54,6 +63,10 @@ function ProfileButton({ user }) {
             </li>
             <li>{user.email}</li>
             <li>
+              <br />
+              <button className="navBtn createBtn" onClick={move}>
+                Create A Spot
+              </button>
               <br />
               <button className="navBtn logoutBtn" onClick={logout}>
                 Log Out
