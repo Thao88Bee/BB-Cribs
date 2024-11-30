@@ -46,9 +46,9 @@ const initialState = {};
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ALL_SPOTS:
-      return { ...state, allSpots: action.spots.Spots };
+      return { ...state, Spots: action.spots.Spots };
     case ADD_SPOT:
-      return { ...state, allSpots: action.spots.Spots };
+      return { ...state, Spots: action.spots };
     default:
       return state;
   }
