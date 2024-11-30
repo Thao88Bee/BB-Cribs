@@ -1,28 +1,40 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getSpots } from "../../store/spot";
 import "./SingleSpot.css";
 
 const SingleSpot = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const singleSpot = useSelector((state) =>
-    state.spot.allSpots.find((spot) => spot.id === Number(id))
+    state.spot.allSpots?.find((spot) => spot.id === Number(id))
   );
 
-  console.log(singleSpot);
+  useEffect(() => {
+    dispatch(getSpots());
+  }, [dispatch]);
 
   return (
-    <div>
-        <h1>{singleSpot?.name}</h1>
-        <p>{singleSpot?.city}, {singleSpot?.state}</p>
-        <div>
-        <img id="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
-        </div>
-        <p>{singleSpot?.description}</p>
-        <div>
-            <p>${singleSpot?.price} per night</p>
-            <button>reserve</button>
-        </div>
-    </div>
+    <>
+    <div id="singleSpot">
+      <h1 id="singleSpotHeader">{singleSpot?.name}</h1>
+      <p>
+        {singleSpot?.city}, {singleSpot?.state}
+      </p>
+      <div id="singleSpotImages">
+          <img className="spotImage one" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
+          <img className="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
+          <img className="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
+          <img className="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
+          <img className="spotImage" src="https://images6.alphacoders.com/105/1058802.jpg" alt="" />
+      </div>
+        <p>${singleSpot?.price} per night</p>
+        <p>Average Rating: {singleSpot?.avgRating}</p>
+        <button>Reserve</button>
+        <p id="description">{singleSpot?.description}</p>
+      </div>
+    </>
   );
 };
 
