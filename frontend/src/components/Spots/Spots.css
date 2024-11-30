@@ -4,12 +4,12 @@
     margin: 90px;
 }
 
-#spotImage{
+#spotsImage{
     height: 200px;
     border-radius: 10px;
     box-shadow: 20px 20px 20px black;
 }
 
-#spotImage:hover {
+#spotsImage:hover {
     height: 210px;
 }
