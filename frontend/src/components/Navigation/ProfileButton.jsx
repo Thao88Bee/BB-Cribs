@@ -41,17 +41,30 @@ function ProfileButton({ user }) {
     navigate("/");
   };
 
-  const move = (e) => {
+  const createSpot = (e) => {
     e.preventDefault();
     closeMenu();
     navigate("/spots/add");
+  };
+
+  const manageSpot = (e) => {
+    e.preventDefault();
+    closeMenu();
+    navigate("/users/:userId/spots");
+  };
+
+  const demo = (e) => {
+    e.preventDefault();
+    dispatch(sessionActions.demoLogin());
+    closeMenu();
+    navigate("/users/:userId/spots");
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
-      <button className="navBtn userBtn" onClick={toggleMenu}>
+      <button className="userBtn" onClick={toggleMenu}>
         <FaHouseUser />
       </button>
       <ul className={ulClassName} ref={ulRef}>
@@ -64,11 +77,15 @@ function ProfileButton({ user }) {
             <li>{user.email}</li>
             <li>
               <br />
-              <button className="navBtn createBtn" onClick={move}>
+              <button className="navBtn" onClick={manageSpot}>
+                Manage Spots
+              </button>
+              <br />
+              <button className="navBtn" onClick={createSpot}>
                 Create A Spot
               </button>
               <br />
-              <button className="navBtn logoutBtn" onClick={logout}>
+              <button className="navBtn" onClick={logout}>
                 Log Out
               </button>
             </li>
@@ -82,7 +99,6 @@ function ProfileButton({ user }) {
                 modalComponent={<LoginFormModal />}
               />
             </li>
-            <br />
             <li>
               <OpenModalButton
                 buttonText="Sign Up"
@@ -90,6 +106,7 @@ function ProfileButton({ user }) {
                 modalComponent={<SignupFormModal />}
               />
             </li>
+            <button className="navBtn" onClick={demo}>Demo User</button>
           </>
         )}
       </ul>

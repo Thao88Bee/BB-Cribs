@@ -5,6 +5,7 @@ import Navigation from "./components/Navigation/Navigation";
 import Spots from "./components/Spots/Spots";
 import SingleSpot from "./components/SingleSpot/SingleSpot";
 import AddSpot from "./components/AddSpot/AddSpot";
+import UserSpot from "./components/UserSpots/UserSpots";
 import * as sessionActions from "./store/session";
 
 function Layout() {
@@ -39,8 +40,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/spots/add",
-        element: <AddSpot />
-      }
+        element: <AddSpot />,
+      },
+      {
+        path: "/users/:userId/spots",
+        element: <UserSpot />,
+      },
     ],
   },
 ]);

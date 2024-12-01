@@ -36,24 +36,14 @@ li {
   cursor: pointer;
   border: none;
   border-radius: 5px;
+  padding: 5px;
+  width: 150px;
+  margin: 20px 0 0 0;
 }
 
 .userBtn {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
   padding: 7px 20px;
-}
-
-.createBtn {
-  padding: 5px;
-  width: 150px;
-}
-
-.loginSigninBtn {
-  width: 100px;
-  padding: 5px;
-}
-
-.logoutBtn {
-  width: 100px;
-  padding: 5px;
-  margin: 20px 0 0 0;
 }

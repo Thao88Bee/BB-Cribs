@@ -1,26 +1,24 @@
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getSpots } from "../../store/spot";
+import { getSpot } from "../../store/spot";
 import "./SingleSpot.css";
 
 const SingleSpot = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const singleSpot = useSelector((state) =>
-    state.spot.Spots?.find((spot) => spot.id === Number(id))
-  );
+  const spot = useSelector((state) => state.spot.spot)
 
   useEffect(() => {
-    dispatch(getSpots());
+    dispatch(getSpot(id));
   }, [dispatch]);
 
   return (
     <>
       <div id="singleSpot">
-        <h1 id="singleSpotHeader">{singleSpot?.name}</h1>
+        <h1 id="singleSpotHeader">{spot?.name}</h1>
         <p>
-          {singleSpot?.city}, {singleSpot?.state}
+          {spot?.city}, {spot?.state}
         </p>
         <div id="singleSpotImages">
           <img
@@ -49,10 +47,11 @@ const SingleSpot = () => {
             alt=""
           />
         </div>
-        <p>${singleSpot?.price} per night</p>
-        <p>Average Rating: {singleSpot?.avgRating}</p>
+        <p>Hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}</p>
+        <p>Average Rating: {spot?.avgRating}</p>
+        <p>${spot?.price} per night</p>
         <button>Reserve</button>
-        <p id="description">{singleSpot?.description}</p>
+        <p id="description">{spot?.description}</p>
       </div>
     </>
   );

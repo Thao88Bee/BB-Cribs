@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { getSpots } from "../../store/spot";
+import { getAllSpots } from "../../store/spot";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Spots.css";
@@ -9,7 +9,7 @@ function Spots() {
   const spots = useSelector((state) => state.spot.Spots);
 
   useEffect(() => {
-    dispatch(getSpots());
+    dispatch(getAllSpots());
   }, [dispatch]);
 
   return (
