@@ -39,11 +39,11 @@ const router = createBrowserRouter([
         element: <SingleSpot />,
       },
       {
-        path: "/spots/add",
+        path: "/spots/create",
         element: <AddSpot />,
       },
       {
-        path: "/users/:userId/spots",
+        path: "/users/:id/spots",
         element: <UserSpot />,
       },
     ],

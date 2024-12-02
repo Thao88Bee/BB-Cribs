@@ -1,5 +1,5 @@
-import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getSpot } from "../../store/spot";
 import "./SingleSpot.css";
@@ -11,7 +11,7 @@ const SingleSpot = () => {
 
   useEffect(() => {
     dispatch(getSpot(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <>

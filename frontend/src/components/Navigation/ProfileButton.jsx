@@ -44,20 +44,20 @@ function ProfileButton({ user }) {
   const createSpot = (e) => {
     e.preventDefault();
     closeMenu();
-    navigate("/spots/add");
+    navigate("/spots/create");
   };
 
   const manageSpot = (e) => {
     e.preventDefault();
     closeMenu();
-    navigate("/users/:userId/spots");
+    navigate(`/users/${user.id}/spots`);
   };
 
   const demo = (e) => {
     e.preventDefault();
     dispatch(sessionActions.demoLogin());
     closeMenu();
-    navigate("/users/:userId/spots");
+    navigate(`/users/${user.id}/spots`);
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -106,7 +106,9 @@ function ProfileButton({ user }) {
                 modalComponent={<SignupFormModal />}
               />
             </li>
-            <button className="navBtn" onClick={demo}>Demo User</button>
+            <button className="navBtn" onClick={demo}>
+              Demo User
+            </button>
           </>
         )}
       </ul>

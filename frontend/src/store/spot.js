@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const GET_ALL_SPOTS = "spot/getAllSpots";
 const GET_SPOT = "spot/getSpot";
+const GET_USER_SPOTS = "spot/getUserSpots";
 const ADD_SPOT = "spot/addSpot";
 const DELETE_SPOT = "spot/deleteSpot";
 
@@ -16,6 +17,13 @@ export const getSpotAction = (spot) => {
   return {
     type: GET_SPOT,
     spot,
+  };
+};
+
+export const getUserSpotsAction = (spots) => {
+  return {
+    type: GET_USER_SPOTS,
+    spots,
   };
 };
 
@@ -45,9 +53,15 @@ export const getSpot = (spotId) => async (dispatch) => {
   const res = await fetch(`/api/spots/${spotId}`);
   const data = await res.json();
 
-  console.log(data);
-
   dispatch(getSpotAction(data));
+  return res;
+};
+
+export const getUserSpots = (userId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/users/${userId}/spots`);
+  const data = await res.json();
+
+  dispatch(getUserSpotsAction(data));
   return res;
 };
 
@@ -67,8 +81,7 @@ export const addSpot = (newSpot) => async (dispatch) => {
   }
 };
 
-export const deleteSpot = (spot) => async (dispatch) => {
-  const spotId = spot.id;
+export const deleteSpot = (spotId) => async (dispatch) => {
   const res = await csrfFetch(`/api/spots/:${spotId}`, {
     method: "DELETE",
   });
@@ -87,7 +100,9 @@ const spotsReducer = (state = initialState, action) => {
     case GET_ALL_SPOTS:
       return { ...state, Spots: action.spots.Spots };
     case GET_SPOT:
-      return { ...state, spot: action.spot }
+      return { ...state, spot: action.spot };
+    case GET_USER_SPOTS:
+      return { ...state, Spots: action.spots.Spots };
     case ADD_SPOT:
       return { ...state, Spots: action.spots };
     case DELETE_SPOT:

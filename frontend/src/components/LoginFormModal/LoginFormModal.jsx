@@ -6,8 +6,8 @@ import "./LoginForm.css";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
-  const [credential, setCredential] = useState("demo@user.io");
-  const [password, setPassword] = useState("password");
+  const [credential, setCredential] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
