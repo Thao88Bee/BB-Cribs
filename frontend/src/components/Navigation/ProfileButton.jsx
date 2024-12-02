@@ -57,7 +57,6 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.demoLogin());
     closeMenu();
-    navigate(`/users/${user.id}/spots`);
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");

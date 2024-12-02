@@ -1,13 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getUserSpots } from "../../store/spot";
+import { deleteSpot, getUserSpots } from "../../store/spot";
 import "./UserSpots.css";
 
 function UserSpot() {
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spot.Spots);
   const user = useSelector((state) => state.session.user);
+  
+  const deleteUserSpot = (spotId) => {
+    dispatch(deleteSpot(spotId));
+  };
 
   useEffect(() => {
     dispatch(getUserSpots());
@@ -35,7 +39,9 @@ function UserSpot() {
               </p>
               <p>${price} per night</p>
             </Link>
-            <button id="deleteBtn">DELETE</button>
+            <button id="deleteBtn" onClick={() => deleteUserSpot(id)}>
+              Delete
+            </button>
           </div>
         ))}
       </ul>

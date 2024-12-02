@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addSpot } from "../../store/spot";
 
 function AddSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session.user)
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -32,8 +33,6 @@ function AddSpot() {
       price,
     };
 
-    console.log(newSpot);
-
     dispatch(addSpot(newSpot));
 
     setName("");
@@ -46,7 +45,7 @@ function AddSpot() {
     setDescription("");
     setPrice("");
 
-    navigate("/");
+    navigate(`/users/${user.id}/spots`);
   };
 
   return (
@@ -123,6 +122,14 @@ function AddSpot() {
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="">Image</label>
+          <input 
+          type="file" 
+          accept="image/*"
+          multiple
           />
         </div>
         <button onClick={onSubmit}>Create Spot</button>
