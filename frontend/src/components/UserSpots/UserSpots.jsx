@@ -1,21 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteSpot, getUserSpots } from "../../store/spot";
 import "./UserSpots.css";
 
 function UserSpot() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const spots = useSelector((state) => state.spot.Spots);
   const user = useSelector((state) => state.session.user);
-  
-  const deleteUserSpot = (spotId) => {
-    dispatch(deleteSpot(spotId));
-  };
 
   useEffect(() => {
     dispatch(getUserSpots());
   }, [dispatch]);
+
+  const update = (spotId) => {
+    navigate(`/spots/${spotId}/update`);
+  };
+
+  const deleteUserSpot = (spotId) => {
+    dispatch(deleteSpot(spotId));
+  };
 
   return (
     <div>
@@ -39,6 +44,9 @@ function UserSpot() {
               </p>
               <p>${price} per night</p>
             </Link>
+            <button id="updateBtn" onClick={() => update(id)}>
+              Update
+            </button>
             <button id="deleteBtn" onClick={() => deleteUserSpot(id)}>
               Delete
             </button>

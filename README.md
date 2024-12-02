@@ -499,7 +499,7 @@ Updates and returns an existing spot.
 * Require Authentication: true
 * Require proper authorization: Spot must belong to the current user
 * Request
-  * Method: PATCH
+  * Method: PUT
   * Route path: /spots/:spotId
   * Headers:
     * Content-Type: application/json

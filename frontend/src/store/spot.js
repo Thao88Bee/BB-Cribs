@@ -3,7 +3,8 @@ import { csrfFetch } from "./csrf";
 const GET_ALL_SPOTS = "spot/getAllSpots";
 const GET_SPOT = "spot/getSpot";
 const GET_USER_SPOTS = "spot/getUserSpots";
-const ADD_SPOT = "spot/addSpot";
+const CREATE_SPOT = "spot/createSpot";
+const UPDATE_SPOT = "spot/updateSpot";
 const DELETE_SPOT = "spot/deleteSpot";
 
 export const getAllSpotsAction = (spots) => {
@@ -27,10 +28,17 @@ export const getUserSpotsAction = (spots) => {
   };
 };
 
-export const addSpotAction = (spot) => {
+export const createSpotAction = (spot) => {
   return {
-    type: ADD_SPOT,
+    type: CREATE_SPOT,
     spot,
+  };
+};
+
+export const updateSpotAction = (updatedSpot) => {
+  return {
+    type: UPDATE_SPOT,
+    updatedSpot,
   };
 };
 
@@ -65,7 +73,7 @@ export const getUserSpots = (userId) => async (dispatch) => {
   return res;
 };
 
-export const addSpot = (newSpot) => async (dispatch) => {
+export const createSpot = (newSpot) => async (dispatch) => {
   const res = await csrfFetch("/api/spots", {
     method: "POST",
     headers: {
@@ -75,9 +83,25 @@ export const addSpot = (newSpot) => async (dispatch) => {
   });
 
   if (res.ok) {
-    const spot = await res.json();
-    dispatch(addSpotAction(spot));
-    return spot;
+    const data = await res.json();
+    dispatch(createSpotAction(data));
+    return res;
+  }
+};
+
+export const updateSpot = (updatedSpot, spotId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/spots/${spotId}`, {
+    method: "PUT",
+    headers: {
+      "Context-Type": "application/json",
+    },
+    body: JSON.stringify(updatedSpot),
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(updateSpotAction(data));
+    return res;
   }
 };
 
@@ -90,8 +114,6 @@ export const deleteSpot = (spotId) => async (dispatch) => {
     const data = await res.json();
     dispatch(deleteSpotAction(data));
     return data;
-  } else {
-    return res
   }
 };
 
@@ -105,10 +127,15 @@ const spotsReducer = (state = initialState, action) => {
       return { ...state, spot: action.spot };
     case GET_USER_SPOTS:
       return { ...state, Spots: action.spots.Spots };
-    case ADD_SPOT:
+    case CREATE_SPOT:
       return { ...state, Spots: action.spots };
+    case UPDATE_SPOT:
+      return { ...state, spot: action.spots }
     case DELETE_SPOT:
-      return { ...state, Spots: state.Spots.filter((spot) => spot.id !== action.spotId) };
+      return {
+        ...state,
+        Spots: state.Spots.filter((spot) => spot.id !== action.spotId),
+      };
     default:
       return state;
   }

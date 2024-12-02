@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addSpot } from "../../store/spot";
+import { updateSpot } from "../../store/spot";
 
-function AddSpot() {
+function UpdateSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user)
-
+  const { id } = useParams();
+  const user = useSelector((state) => state.session.user);
+  
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -21,7 +22,7 @@ function AddSpot() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const newSpot = {
+    const updatedSpot = {
       name,
       address,
       city,
@@ -33,7 +34,7 @@ function AddSpot() {
       price,
     };
 
-    dispatch(addSpot(newSpot));
+    dispatch(updateSpot(updatedSpot, id));
 
     setName("");
     setAddress("");
@@ -50,7 +51,7 @@ function AddSpot() {
 
   return (
     <>
-      <h1>Create A Spot</h1>
+      <h1>Update A Spot</h1>
       <form action="">
         <div>
           <label htmlFor="">Name:</label>
@@ -61,7 +62,7 @@ function AddSpot() {
           />
         </div>
         <div>
-          <label htmlFor="">Adress:</label>
+          <label htmlFor="">Address:</label>
           <input
             type="text"
             value={address}
@@ -126,16 +127,12 @@ function AddSpot() {
         </div>
         <div>
           <label htmlFor="">Image</label>
-          <input 
-          type="file" 
-          accept="image/*"
-          multiple
-          />
+          <input type="file" accept="image/*" multiple />
         </div>
-        <button onClick={onSubmit}>Create Spot</button>
+        <button onClick={onSubmit}>Update Spot</button>
       </form>
     </>
   );
 }
 
-export default AddSpot;
+export default UpdateSpot;
