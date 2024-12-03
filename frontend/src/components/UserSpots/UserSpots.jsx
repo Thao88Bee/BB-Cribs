@@ -1,25 +1,38 @@
+import { csrfFetch } from "../../store/csrf";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { deleteSpot, getUserSpots } from "../../store/spot";
+import { getUserSpots } from "../../store/spot";
 import "./UserSpots.css";
 
 function UserSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const spots = useSelector((state) => state.spot.Spots);
   const user = useSelector((state) => state.session.user);
 
+  const [updated, setUpdated] = useState(false);
+
   useEffect(() => {
     dispatch(getUserSpots());
-  }, [dispatch]);
+  }, [dispatch, updated]);
 
-  const update = (spotId) => {
+  const updateUserSpot = (spotId) => {
     navigate(`/spots/${spotId}/update`);
   };
 
-  const deleteUserSpot = (spotId) => {
-    dispatch(deleteSpot(spotId));
+  const deleteUserSpot = async (spotId) => {
+    const res = await csrfFetch(`/api/spots/${spotId}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log("deleteSpot");
+      setUpdated((prev) => !prev);
+      return data;
+    }
   };
 
   return (
@@ -44,7 +57,7 @@ function UserSpot() {
               </p>
               <p>${price} per night</p>
             </Link>
-            <button id="updateBtn" onClick={() => update(id)}>
+            <button id="updateBtn" onClick={() => updateUserSpot(id)}>
               Update
             </button>
             <button id="deleteBtn" onClick={() => deleteUserSpot(id)}>
