@@ -5,6 +5,7 @@ const GET_SPOT = "spot/getSpot";
 const GET_USER_SPOTS = "spot/getUserSpots";
 const CREATE_SPOT = "spot/createSpot";
 const UPDATE_SPOT = "spot/updateSpot";
+const DELETE_SPOT = "spot/deleteSpot";
 
 export const getAllSpotsAction = (spots) => {
   return {
@@ -38,6 +39,13 @@ export const updateSpotAction = (updatedSpot) => {
   return {
     type: UPDATE_SPOT,
     updatedSpot,
+  };
+};
+
+export const deleteSpotAction = (spotId) => {
+  return {
+    type: DELETE_SPOT,
+    spotId,
   };
 };
 
@@ -110,7 +118,9 @@ const spotsReducer = (state = initialState, action) => {
     case CREATE_SPOT:
       return { ...state, Spots: action.spots };
     case UPDATE_SPOT:
-      return { ...state, spot: action.spots }
+      return { ...state, spot: action.spots };
+    case DELETE_SPOT:
+      return { ...state, Spots: action.spots };
     default:
       return state;
   }
