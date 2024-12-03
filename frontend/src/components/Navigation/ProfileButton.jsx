@@ -53,12 +53,6 @@ function ProfileButton({ user }) {
     navigate(`/users/${user.id}/spots`);
   };
 
-  const demo = (e) => {
-    e.preventDefault();
-    dispatch(sessionActions.demoLogin());
-    closeMenu();
-  };
-
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
@@ -105,9 +99,6 @@ function ProfileButton({ user }) {
                 modalComponent={<SignupFormModal />}
               />
             </li>
-            <button className="navBtn" onClick={demo}>
-              Demo User
-            </button>
           </>
         )}
       </ul>

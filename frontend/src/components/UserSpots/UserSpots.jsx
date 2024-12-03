@@ -12,11 +12,11 @@ function UserSpot() {
   const spots = useSelector((state) => state.spot.Spots);
   const user = useSelector((state) => state.session.user);
 
-  const [updated, setUpdated] = useState(false);
+  const [deleted, setDeleted] = useState(false);
 
   useEffect(() => {
     dispatch(getUserSpots());
-  }, [dispatch, updated]);
+  }, [dispatch, deleted]);
 
   const updateUserSpot = (spotId) => {
     navigate(`/spots/${spotId}/update`);
@@ -30,7 +30,7 @@ function UserSpot() {
     if (res.ok) {
       const data = await res.json();
       console.log("deleteSpot");
-      setUpdated((prev) => !prev);
+      setDeleted((prev) => !prev);
       return data;
     }
   };
