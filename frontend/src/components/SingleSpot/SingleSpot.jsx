@@ -18,7 +18,7 @@ const SingleSpot = () => {
       <div id="singleSpot">
         <h1 id="singleSpotHeader">{spot?.name}</h1>
         <p>
-          {spot?.city}, {spot?.state}
+          {spot?.city}, {spot?.state}, {spot?.country}
         </p>
         <div id="singleSpotImages">
           <img
@@ -47,11 +47,17 @@ const SingleSpot = () => {
             alt=""
           />
         </div>
+        <div className="spotinfroSection">
+        <div className="inforSection">
         <p>Hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}</p>
         <p>Average Rating: {spot?.avgRating}</p>
-        <p>${spot?.price} per night</p>
-        <button>Reserve</button>
         <p id="description">{spot?.description}</p>
+        </div>
+        <div className="reserveSection">
+        <p>${spot?.price} per night</p>
+        <button id="reserveBtn" onClick={() => alert("Feature coming soon")}>Reserve</button>
+        </div>
+        </div>
       </div>
     </>
   );

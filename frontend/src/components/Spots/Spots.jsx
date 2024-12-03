@@ -15,7 +15,7 @@ function Spots() {
   return (
     <>
       <ul id="spots">
-        {spots?.map(({ id, city, state, name, price }) => (
+        {spots?.map(({ id, city, state, name, price, avgRating }) => (
           <div id="spotsBox" key={id}>
             <Link className="link" to={`/spots/${id}`}>
               <p>{name}</p>
@@ -31,6 +31,7 @@ function Spots() {
                 {city}, {state}
               </p>
               <p>${price} per night</p>
+              <p>{avgRating}</p>
             </Link>
           </div>
         ))}

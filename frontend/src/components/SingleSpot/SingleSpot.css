@@ -24,12 +24,23 @@
   border-radius: 10px;
 }
 
-#secThree {
+.spotinfroSection {
   display: flex;
-  margin: 50px;
 }
 
-#reserveSec {
-  display: flex;
-  justify-content: space-evenly;
+.inforSection {
+  margin: 30px 180px;
+}
+
+.reserveSection {
+  margin: 30px 200px;
+}
+
+#reserveBtn {
+  background-color: rgb(255, 0, 0);
+  width: 120px;
+  border: 2px solid rgb(0, 0, 0);
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
 }
