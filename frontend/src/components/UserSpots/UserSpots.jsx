@@ -10,7 +10,6 @@ function UserSpot() {
   const dispatch = useDispatch();
 
   const spots = useSelector((state) => state.spot.Spots);
-  const user = useSelector((state) => state.session.user);
 
   const [deleted, setDeleted] = useState(false);
 
@@ -37,9 +36,7 @@ function UserSpot() {
 
   return (
     <div>
-      <h1 id="userHeader">
-        {user?.firstName} {user?.lastName} Spots
-      </h1>
+      <h1 id="userHeader">Manage Spots</h1>
       <ul id="spots">
         {spots?.map(({ id, name, city, state, price }) => (
           <div id="spotsBox" key={id}>
