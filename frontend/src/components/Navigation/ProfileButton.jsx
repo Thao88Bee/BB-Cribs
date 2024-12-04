@@ -41,12 +41,6 @@ function ProfileButton({ user }) {
     navigate("/");
   };
 
-  const createSpot = (e) => {
-    e.preventDefault();
-    closeMenu();
-    navigate("/spots/create");
-  };
-
   const manageSpot = (e) => {
     e.preventDefault();
     closeMenu();
@@ -69,10 +63,6 @@ function ProfileButton({ user }) {
               <br />
               <button className="navBtn" onClick={manageSpot}>
                 Manage Spots
-              </button>
-              <br />
-              <button className="navBtn" onClick={createSpot}>
-                Create A Spot
               </button>
               <br />
               <button className="navBtn" onClick={logout}>
