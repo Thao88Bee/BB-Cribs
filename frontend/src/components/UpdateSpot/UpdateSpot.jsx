@@ -19,7 +19,7 @@ function UpdateSpot() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const updatedSpot = {
@@ -34,7 +34,7 @@ function UpdateSpot() {
       price,
     };
 
-    dispatch(updateSpot(updatedSpot, id));
+    await dispatch(updateSpot(updatedSpot, id));
 
     setName("");
     setAddress("");
