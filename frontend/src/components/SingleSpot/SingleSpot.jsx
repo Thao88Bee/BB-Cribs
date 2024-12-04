@@ -2,15 +2,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getSpot } from "../../store/spot";
+import { getSpotReviews } from "../../store/review";
 import "./SingleSpot.css";
 
 const SingleSpot = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const spot = useSelector((state) => state.spot.spot)
+  const spot = useSelector((state) => state.spot.spot);
+  const reviews = useSelector((state) => state.review.Reviews)
 
   useEffect(() => {
     dispatch(getSpot(id));
+    dispatch(getSpotReviews(id));
   }, [dispatch, id]);
 
   return (
@@ -48,15 +51,29 @@ const SingleSpot = () => {
           />
         </div>
         <div className="spotinfroSection">
-        <div className="inforSection">
-        <p>Hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}</p>
-        <p>Average Rating: {spot?.avgRating}</p>
-        <p id="description">{spot?.description}</p>
+          <div className="inforSection">
+            <p>
+              Hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}
+            </p>
+            <p>Average Rating: {spot?.avgRating}</p>
+            <p id="description">{spot?.description}</p>
+          </div>
+          <div className="reserveSection">
+            <p>${spot?.price} per night</p>
+            <button
+              id="reserveBtn"
+              onClick={() => alert("Feature coming soon")}
+            >
+              Reserve
+            </button>
+          </div>
         </div>
-        <div className="reserveSection">
-        <p>${spot?.price} per night</p>
-        <button id="reserveBtn" onClick={() => alert("Feature coming soon")}>Reserve</button>
-        </div>
+        <div id="reviewSec">
+          {reviews?.map(({ id, review  }) => (
+            <div key={id} className="reviews">
+              {review}
+            </div>
+          ))}
         </div>
       </div>
     </>
