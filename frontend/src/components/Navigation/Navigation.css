@@ -7,7 +7,7 @@
 }
 
 li {
-  color: rgb(255, 255, 255);
+  color: rgb(255, 0, 0);
   list-style: none;
   align-content: center;
 }
@@ -18,7 +18,7 @@ li {
 }
 
 .profile-dropdown {
-  background-color: rgb(255, 0, 0);
+  background-color: rgb(255, 255, 255);
   padding: 25px 15px;
   border-radius: 10px;
   position: absolute;
@@ -33,12 +33,15 @@ li {
 }
 
 .navBtn {
+  color: rgb(255, 0, 0);
+  background-color: rgb(210, 210, 210);
+  border: 2px solid rgb(0, 0, 0);
   cursor: pointer;
-  border: none;
   border-radius: 5px;
   padding: 5px;
   width: 150px;
   margin: 20px 0 0 0;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
 }
 
 .userBtn {

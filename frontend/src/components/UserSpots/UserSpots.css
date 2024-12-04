@@ -5,20 +5,11 @@
 
 #updateBtn {
     margin: 0 20px 20px 0;
-    background-color: rgb(54, 180, 64);
-    border: none;
-    width: 100px;
+    color: rgb(0, 177, 0);
+    background-color: rgb(210, 210, 210);
+    border: 2px solid rgb(0, 0, 0);
+    width: 150px;
     padding: 5px;
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgb(0, 0, 0);
-}
-
-#deleteBtn {
-  margin: 0 0 20px 20px;
-  background-color: rgb(228, 39, 39);
-  border: none;
-  width: 100px;
-  padding: 5px;
-  border-radius: 5px;
-  box-shadow: 5px 5px 5px rgb(0, 0, 0);
 }

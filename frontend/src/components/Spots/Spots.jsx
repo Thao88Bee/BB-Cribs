@@ -24,7 +24,7 @@ function Spots() {
                   id="spotsImage"
                   key={id}
                   src="https://images6.alphacoders.com/105/1058802.jpg"
-                  alt=""
+                  alt={name}
                 />
               </li>
               <p>

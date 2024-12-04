@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getUserSpots } from "../../store/spot";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import "./UserSpots.css";
+
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 function UserSpot() {
   const navigate = useNavigate();
@@ -12,14 +15,17 @@ function UserSpot() {
   const spots = useSelector((state) => state.spot.Spots);
 
   const [deleted, setDeleted] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     dispatch(getUserSpots());
-  }, [dispatch, deleted]);
+  }, [dispatch, deleted, showMenu]);
 
   const updateUserSpot = (spotId) => {
     navigate(`/spots/${spotId}/update`);
   };
+
+  const closeMenu = () => setShowMenu(false);
 
   const deleteUserSpot = async (spotId) => {
     const res = await csrfFetch(`/api/spots/${spotId}`, {
@@ -28,7 +34,6 @@ function UserSpot() {
 
     if (res.ok) {
       const data = await res.json();
-      console.log("deleteSpot");
       setDeleted((prev) => !prev);
       return data;
     }
@@ -57,9 +62,22 @@ function UserSpot() {
             <button id="updateBtn" onClick={() => updateUserSpot(id)}>
               Update
             </button>
-            <button id="deleteBtn" onClick={() => deleteUserSpot(id)}>
-              Delete
-            </button>
+            <>
+              {
+                <>
+                  <OpenModalButton
+                    buttonText="Delete"
+                    onButtonClick={closeMenu}
+                    modalComponent={
+                      <DeleteModal
+                        deleting={() => deleteUserSpot(id)}
+                        spotId={id}
+                      />
+                    }
+                  />
+                </>
+              }
+            </>
           </div>
         ))}
       </ul>
