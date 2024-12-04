@@ -9,7 +9,7 @@ const SingleSpot = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const spot = useSelector((state) => state.spot.spot);
-  const reviews = useSelector((state) => state.review.Reviews)
+  const reviews = useSelector((state) => state.review.Reviews);
 
   useEffect(() => {
     dispatch(getSpot(id));
@@ -69,7 +69,7 @@ const SingleSpot = () => {
           </div>
         </div>
         <div id="reviewSec">
-          {reviews?.map(({ id, review  }) => (
+          {reviews?.map(({ id, review }) => (
             <div key={id} className="reviews">
               {review}
             </div>
