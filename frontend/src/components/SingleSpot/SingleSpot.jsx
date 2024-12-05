@@ -81,8 +81,8 @@ const SingleSpot = () => {
           </div>
           <div className="reserveSection">
             <p>
-              {spot?.avgRating ? spot?.avgRating : "New"}
-              <span id="star">{!spot?.avgRating ? spot?.avgRating : "★"}</span>
+              {spot?.avgRating ? spot?.avgStarRating : "New"}
+              <span id="star">{!spot?.avgStarRating ? spot?.avgStarRating : "★"}</span>
             </p>
             <p>${spot?.price} / Night</p>
             <button
