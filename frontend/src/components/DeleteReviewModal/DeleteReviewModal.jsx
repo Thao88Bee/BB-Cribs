@@ -13,10 +13,10 @@ function DeleteReviewModal({ deleting, reviewId }) {
       <h1 id="loginHeader">Confirm Delete</h1>
       <p>Are you sure you want to remove this review?</p>
       <button className="yes Btn" onClick={() => doDelete()}>
-        Yes (Delete Spot)
+        Yes (Delete Review)
       </button>
       <button className="no Btn" onClick={() => closeModal()}>
-        No (Keep Spot)
+        No (Keep Review)
       </button>
     </div>
   );
