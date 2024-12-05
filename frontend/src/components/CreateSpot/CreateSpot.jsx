@@ -19,7 +19,7 @@ function CreateSpot() {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const newSpot = {
@@ -34,7 +34,7 @@ function CreateSpot() {
       price,
     };
 
-    dispatch(createSpot(newSpot));
+    await dispatch(createSpot(newSpot));
 
     setName("");
     setAddress("");
