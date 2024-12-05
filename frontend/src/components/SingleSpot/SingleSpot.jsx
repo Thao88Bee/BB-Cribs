@@ -132,9 +132,7 @@ const SingleSpot = () => {
                     />
                   </>
                 ) : (
-                  <>
-                    <div>here</div>
-                  </>
+                  <></>
                 )}
               </div>
             </div>
@@ -150,8 +148,7 @@ const SingleSpot = () => {
               </div>
             </>
           ) : (
-            <>
-            </>
+            <></>
           )}
         </div>
       </div>
