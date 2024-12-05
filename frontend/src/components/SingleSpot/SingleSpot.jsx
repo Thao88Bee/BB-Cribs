@@ -55,10 +55,10 @@ const SingleSpot = () => {
             <p>
               Hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}
             </p>
-            <p>{spot?.avgRating ? spot?.avgRating: "New"}<span id="star">{!spot?.avgRating ? spot?.avgRating: "★"}</span></p>
             <p id="description">{spot?.description}</p>
           </div>
           <div className="reserveSection">
+            <p>{spot?.avgRating ? spot?.avgRating: "New"}<span id="star">{!spot?.avgRating ? spot?.avgRating: "★"}</span></p>
             <p>${spot?.price} / Night</p>
             <button
               id="reserveBtn"
@@ -75,7 +75,7 @@ const SingleSpot = () => {
                 <p>{User.firstName}</p>
               <p>{new Date(createdAt).toLocaleString("default", {month: "long" })}, {new Date(createdAt).getFullYear()}</p>
               </div>
-              <p className="ratingStar">{stars}</p>
+              <p className="ratingStar">{stars}<span id="star">{!stars ? stars: "★"}</span></p>
               <p className="reviewDescr">{review}</p>
             </div>
           ))}
