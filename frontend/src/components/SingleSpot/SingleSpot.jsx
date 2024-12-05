@@ -1,9 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getSpot } from "../../store/spot";
 import { getSpotReviews } from "../../store/review";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import "./SingleSpot.css";
+
+import DeleteSpotModal from "../DeleteSpotModal/DeleteSpotModal";
 
 const SingleSpot = () => {
   const dispatch = useDispatch();
@@ -12,12 +15,14 @@ const SingleSpot = () => {
   const reviews = useSelector((state) => state.review.Reviews);
   const user = useSelector((state) => state.session.user);
 
-  console.log(user.id);
+  const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     dispatch(getSpot(id));
     dispatch(getSpotReviews(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, showMenu]);
+
+  const closeMenu = () => setShowMenu(false);
 
   return (
     <>
@@ -94,7 +99,11 @@ const SingleSpot = () => {
               <div className="lol">
                 {user.id === User.id ? (
                   <>
-                    <button className="reviewDeleteBtn">Delete</button>
+                    <OpenModalButton
+                      buttonText="Delete"
+                      onButtonClick={closeMenu}
+                      modalComponent={<DeleteSpotModal />}
+                    />
                   </>
                 ) : (
                   <></>

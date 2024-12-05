@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getUserSpots } from "../../store/spot";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
 import "./UserSpots.css";
-
-import DeleteModal from "../DeleteModal/DeleteModal";
 
 function UserSpot() {
   const navigate = useNavigate();
@@ -58,8 +57,11 @@ function UserSpot() {
                 {city}, {state}
               </p>
               <div className="priceRatingSec">
-              <p>{avgRating ? avgRating: "New"} <span id="star">{!avgRating ? avgRating: "★"}</span></p>
-              <p>${price} / Night</p>
+                <p>
+                  {avgRating ? avgRating : "New"}{" "}
+                  <span id="star">{!avgRating ? avgRating : "★"}</span>
+                </p>
+                <p>${price} / Night</p>
               </div>
             </Link>
             <button id="updateBtn" onClick={() => updateUserSpot(id)}>
@@ -72,7 +74,7 @@ function UserSpot() {
                     buttonText="Delete"
                     onButtonClick={closeMenu}
                     modalComponent={
-                      <DeleteModal
+                      <DeleteReviewModal
                         deleting={() => deleteUserSpot(id)}
                         spotId={id}
                       />

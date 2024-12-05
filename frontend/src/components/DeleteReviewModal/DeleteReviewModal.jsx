@@ -1,7 +1,6 @@
 import { useModal } from "../../context/Modal";
-import "./DeleteSpotModal.css";
 
-function DeleteSpotModal({ deleting, spotId }) {
+function DeleteReviewModal({ deleting, spotId }) {
   const { closeModal } = useModal();
 
   const doDelete = () => {
@@ -23,4 +22,4 @@ function DeleteSpotModal({ deleting, spotId }) {
   );
 }
 
-export default DeleteSpotModal;
+export default DeleteReviewModal;

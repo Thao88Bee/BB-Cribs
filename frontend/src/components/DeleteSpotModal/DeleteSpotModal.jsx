@@ -1,7 +1,7 @@
 import { useModal } from "../../context/Modal";
 import "./DeleteSpotModal.css";
 
-function DeleteSpotModal({ deleting, spotId }) {
+function DeleteModal({ deleting, spotId }) {
   const { closeModal } = useModal();
 
   const doDelete = () => {
@@ -12,7 +12,7 @@ function DeleteSpotModal({ deleting, spotId }) {
   return (
     <div id="deleteModal">
       <h1 id="loginHeader">Confirm Delete</h1>
-      <p>Are you sure you want to remove this spot?</p>
+      <p>Are you sure you want to remove this review?</p>
       <button className="yes Btn" onClick={() => doDelete()}>
         Yes (Delete Spot)
       </button>
@@ -23,4 +23,4 @@ function DeleteSpotModal({ deleting, spotId }) {
   );
 }
 
-export default DeleteSpotModal;
+export default DeleteModal;
