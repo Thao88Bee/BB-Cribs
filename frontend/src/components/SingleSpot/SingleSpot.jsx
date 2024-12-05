@@ -6,7 +6,7 @@ import { getSpot } from "../../store/spot";
 import { getSpotReviews } from "../../store/review";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
-import PostReviewModal from "../CreateSpot/PostReviewModal/PostReviewModal";
+import PostReviewModal from "../PostReviewModal/PostReviewModal";
 import "./SingleSpot.css";
 
 const SingleSpot = () => {
@@ -15,6 +15,8 @@ const SingleSpot = () => {
   const spot = useSelector((state) => state.spot.spot);
   const reviews = useSelector((state) => state.review.Reviews);
   const user = useSelector((state) => state.session.user);
+
+  const ownReview = reviews?.some((review) => review.userId === user?.id);
 
   const [deleted, setDeleted] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
@@ -82,7 +84,9 @@ const SingleSpot = () => {
           <div className="reserveSection">
             <p>
               {spot?.avgRating ? spot?.avgStarRating : "New"}
-              <span id="star">{!spot?.avgStarRating ? spot?.avgStarRating : "★"}</span>
+              <span id="star">
+                {!spot?.avgStarRating ? spot?.avgStarRating : "★"}
+              </span>
             </p>
             <p>${spot?.price} / Night</p>
             <button
@@ -97,7 +101,10 @@ const SingleSpot = () => {
           {reviews?.map(({ id, review, stars, createdAt, User }) => (
             <div key={id} className="reviews">
               <div className="reviewNameDate">
-                <p>{User?.firstName}</p>
+                <p>
+                  {User?.firstName}
+                  {User?.lastName}
+                </p>
                 <p>
                   {new Date(createdAt).toLocaleString("default", {
                     month: "long",
@@ -125,20 +132,27 @@ const SingleSpot = () => {
                     />
                   </>
                 ) : (
-                  <></>
+                  <>
+                    <div>here</div>
+                  </>
                 )}
               </div>
             </div>
           ))}
-          <>
-          <div className="reviewDeleteBtn">
-            <OpenModalButton
-              buttonText="Post Your Review"
-              onButtonClick={closeMenu}
-              modalComponent={<PostReviewModal />}
-            />
-          </div>
-          </>
+          {user?.id !== spot?.Owner?.id && !ownReview ? (
+            <>
+              <div className="reviewDeleteBtn">
+                <OpenModalButton
+                  buttonText="Post Your Review"
+                  onButtonClick={closeMenu}
+                  modalComponent={<PostReviewModal />}
+                />
+              </div>
+            </>
+          ) : (
+            <>
+            </>
+          )}
         </div>
       </div>
     </>
