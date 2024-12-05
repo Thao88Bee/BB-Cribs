@@ -43,7 +43,7 @@ function UserSpot() {
     <div>
       <h1 id="userHeader">Manage Spots</h1>
       <ul id="spots">
-        {spots?.map(({ id, name, city, state }) => (
+        {spots?.map(({ id, name, city, state, avgRating, price }) => (
           <div id="spotsBox" key={id}>
             <Link className="link" to={`/spots/${id}`}>
               <p>{name}</p>
@@ -57,6 +57,10 @@ function UserSpot() {
               <p>
                 {city}, {state}
               </p>
+              <div className="priceRatingSec">
+              <p>{avgRating ? avgRating: "New"} <span id="star">{!avgRating ? avgRating: "★"}</span></p>
+              <p>${price} / Night</p>
+              </div>
             </Link>
             <button id="updateBtn" onClick={() => updateUserSpot(id)}>
               Update

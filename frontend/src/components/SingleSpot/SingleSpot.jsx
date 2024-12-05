@@ -55,11 +55,11 @@ const SingleSpot = () => {
             <p>
               Hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}
             </p>
-            <p>Average Rating: {spot?.avgRating}</p>
+            <p>{spot?.avgRating ? spot?.avgRating: "New"}<span id="star">{!spot?.avgRating ? spot?.avgRating: "★"}</span></p>
             <p id="description">{spot?.description}</p>
           </div>
           <div className="reserveSection">
-            <p>${spot?.price} per night</p>
+            <p>${spot?.price} / Night</p>
             <button
               id="reserveBtn"
               onClick={() => alert("Feature coming soon")}
@@ -69,9 +69,14 @@ const SingleSpot = () => {
           </div>
         </div>
         <div id="reviewSec">
-          {reviews?.map(({ id, review }) => (
+          {reviews?.map(({ id, review, stars, createdAt, User }) => (
             <div key={id} className="reviews">
-              {review}
+              <div className="reviewNameDate">
+                <p>{User.firstName}</p>
+              <p>{new Date(createdAt).toLocaleString("default", {month: "long" })}, {new Date(createdAt).getFullYear()}</p>
+              </div>
+              <p className="ratingStar">{stars}</p>
+              <p className="reviewDescr">{review}</p>
             </div>
           ))}
         </div>

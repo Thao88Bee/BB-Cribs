@@ -30,8 +30,13 @@ function Spots() {
               <p>
                 {city}, {state}
               </p>
-              <p>${price} per night</p>
-              <p>{avgRating ? avgRating: "New"} <span id="star">{!avgRating ? avgRating: "★"}</span></p>
+              <div className="priceRatingSec">
+                <p>
+                  {avgRating ? avgRating : "New"}{" "}
+                  <span id="star">{!avgRating ? avgRating : "★"}</span>
+                </p>
+                <p>${price} / Night</p>
+              </div>
             </Link>
           </div>
         ))}

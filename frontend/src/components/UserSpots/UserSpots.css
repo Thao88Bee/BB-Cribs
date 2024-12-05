@@ -15,3 +15,11 @@
     box-shadow: 5px 5px 5px rgb(0, 0, 0);
     cursor: pointer;
 }
+
+.priceRatingSec {
+  display: flex;
+  width: 75%;
+  justify-content: space-around;
+  margin: 0 0 0 45px;
+}
+
