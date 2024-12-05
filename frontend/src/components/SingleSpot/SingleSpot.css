@@ -48,6 +48,7 @@
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
 }
 
 #reviewSec {
@@ -55,7 +56,7 @@
   flex-direction: column;
   width: 60%;
   flex-wrap: wrap-reverse;
-  margin: 0 0 50px 50px;
+  margin: 0 0 100px 50px;
 }
 
 .reviews {
@@ -87,10 +88,16 @@ align-items: flex-end;
 }
 
 .reviewDeleteBtn {
-  width: 120px;
-  margin: 15px 0 0 0;
+  width: 175px;
+}
+
+.postReview {
+  width: 150px;
+  margin: 0 25px 0 0;
   background-color: rgb(255, 0, 0);
+  padding: 5px;
   border: 2px solid rgb(0, 0, 0);
-  cursor: pointer;
   border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
 }

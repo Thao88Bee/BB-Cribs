@@ -6,6 +6,7 @@ import { getSpot } from "../../store/spot";
 import { getSpotReviews } from "../../store/review";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
+import PostReviewModal from "../CreateSpot/PostReviewModal/PostReviewModal";
 import "./SingleSpot.css";
 
 const SingleSpot = () => {
@@ -129,6 +130,15 @@ const SingleSpot = () => {
               </div>
             </div>
           ))}
+          <>
+          <div className="reviewDeleteBtn">
+            <OpenModalButton
+              buttonText="Post Your Review"
+              onButtonClick={closeMenu}
+              modalComponent={<PostReviewModal />}
+            />
+          </div>
+          </>
         </div>
       </div>
     </>
