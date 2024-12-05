@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getUserSpots } from "../../store/spot";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
-import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
+import DeleteSpotModal from "../DeleteSpotModal/DeleteSpotModal";
 import "./UserSpots.css";
 
 function UserSpot() {
@@ -74,7 +74,7 @@ function UserSpot() {
                     buttonText="Delete"
                     onButtonClick={closeMenu}
                     modalComponent={
-                      <DeleteReviewModal
+                      <DeleteSpotModal
                         deleting={() => deleteUserSpot(id)}
                         spotId={id}
                       />

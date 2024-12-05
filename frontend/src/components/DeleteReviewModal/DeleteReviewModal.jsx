@@ -1,17 +1,17 @@
 import { useModal } from "../../context/Modal";
 
-function DeleteReviewModal({ deleting, spotId }) {
+function DeleteReviewModal({ deleting, reviewId }) {
   const { closeModal } = useModal();
 
   const doDelete = () => {
-    deleting(spotId);
+    deleting(reviewId);
     closeModal();
   };
 
   return (
     <div id="deleteModal">
       <h1 id="loginHeader">Confirm Delete</h1>
-      <p>Are you sure you want to remove this spot?</p>
+      <p>Are you sure you want to remove this review?</p>
       <button className="yes Btn" onClick={() => doDelete()}>
         Yes (Delete Spot)
       </button>

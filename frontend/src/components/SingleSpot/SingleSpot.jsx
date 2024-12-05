@@ -1,12 +1,12 @@
+import { csrfFetch } from "../../store/csrf";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getSpot } from "../../store/spot";
 import { getSpotReviews } from "../../store/review";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
 import "./SingleSpot.css";
-
-import DeleteSpotModal from "../DeleteSpotModal/DeleteSpotModal";
 
 const SingleSpot = () => {
   const dispatch = useDispatch();
@@ -15,14 +15,27 @@ const SingleSpot = () => {
   const reviews = useSelector((state) => state.review.Reviews);
   const user = useSelector((state) => state.session.user);
 
+  const [deleted, setDeleted] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
   useEffect(() => {
     dispatch(getSpot(id));
     dispatch(getSpotReviews(id));
-  }, [dispatch, id, showMenu]);
+  }, [dispatch, id, deleted, showMenu]);
 
   const closeMenu = () => setShowMenu(false);
+
+  const deleteReview = async (reviewId) => {
+    const res = await csrfFetch(`/api/reviews/${reviewId}`, {
+      method: "DELETE",
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      setDeleted((prev) => !prev);
+      return data;
+    }
+  };
 
   return (
     <>
@@ -61,7 +74,7 @@ const SingleSpot = () => {
         <div className="spotinfroSection">
           <div className="inforSection">
             <p>
-              Hosted by {spot?.Owner.firstName} {spot?.Owner.lastName}
+              Hosted by {spot?.Owner?.firstName} {spot?.Owner?.lastName}
             </p>
             <p id="description">{spot?.description}</p>
           </div>
@@ -83,7 +96,7 @@ const SingleSpot = () => {
           {reviews?.map(({ id, review, stars, createdAt, User }) => (
             <div key={id} className="reviews">
               <div className="reviewNameDate">
-                <p>{User.firstName}</p>
+                <p>{User?.firstName}</p>
                 <p>
                   {new Date(createdAt).toLocaleString("default", {
                     month: "long",
@@ -97,12 +110,17 @@ const SingleSpot = () => {
               </p>
               <p className="reviewDescr">{review}</p>
               <div className="lol">
-                {user.id === User.id ? (
+                {user?.id === User?.id ? (
                   <>
                     <OpenModalButton
                       buttonText="Delete"
                       onButtonClick={closeMenu}
-                      modalComponent={<DeleteSpotModal />}
+                      modalComponent={
+                        <DeleteReviewModal
+                          deleting={() => deleteReview(id)}
+                          reviewId={id}
+                        />
+                      }
                     />
                   </>
                 ) : (
