@@ -10,6 +10,9 @@ const SingleSpot = () => {
   const { id } = useParams();
   const spot = useSelector((state) => state.spot.spot);
   const reviews = useSelector((state) => state.review.Reviews);
+  const user = useSelector((state) => state.session.user);
+
+  console.log(user.id);
 
   useEffect(() => {
     dispatch(getSpot(id));
@@ -58,7 +61,10 @@ const SingleSpot = () => {
             <p id="description">{spot?.description}</p>
           </div>
           <div className="reserveSection">
-            <p>{spot?.avgRating ? spot?.avgRating: "New"}<span id="star">{!spot?.avgRating ? spot?.avgRating: "★"}</span></p>
+            <p>
+              {spot?.avgRating ? spot?.avgRating : "New"}
+              <span id="star">{!spot?.avgRating ? spot?.avgRating : "★"}</span>
+            </p>
             <p>${spot?.price} / Night</p>
             <button
               id="reserveBtn"
@@ -73,10 +79,27 @@ const SingleSpot = () => {
             <div key={id} className="reviews">
               <div className="reviewNameDate">
                 <p>{User.firstName}</p>
-              <p>{new Date(createdAt).toLocaleString("default", {month: "long" })}, {new Date(createdAt).getFullYear()}</p>
+                <p>
+                  {new Date(createdAt).toLocaleString("default", {
+                    month: "long",
+                  })}
+                  , {new Date(createdAt).getFullYear()}
+                </p>
               </div>
-              <p className="ratingStar">{stars}<span id="star">{!stars ? stars: "★"}</span></p>
+              <p className="ratingStar">
+                {stars}
+                <span id="star">{!stars ? stars : "★"}</span>
+              </p>
               <p className="reviewDescr">{review}</p>
+              <div className="lol">
+                {user.id === User.id ? (
+                  <>
+                    <button className="reviewDeleteBtn">Delete</button>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
           ))}
         </div>

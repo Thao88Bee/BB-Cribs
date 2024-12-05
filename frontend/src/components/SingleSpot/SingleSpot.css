@@ -55,7 +55,7 @@
   flex-direction: column;
   width: 60%;
   flex-wrap: wrap-reverse;
-  margin: 0 0 0 50px;
+  margin: 0 0 50px 50px;
 }
 
 .reviews {
@@ -63,7 +63,7 @@
   border: 2px solid black;
   border-radius: 10px;
   margin: 10px;
-  padding: 20px;
+  padding: 15px;
   width: 100%;
 }
 
@@ -78,4 +78,19 @@
 
 .reviewDescr {
   margin: 10px 0 0 0;
+}
+
+.lol {
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+}
+
+.reviewDeleteBtn {
+  width: 120px;
+  margin: 15px 0 0 0;
+  background-color: rgb(255, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+  cursor: pointer;
+  border-radius: 5px;
 }
