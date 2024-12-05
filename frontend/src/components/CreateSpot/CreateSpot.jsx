@@ -59,7 +59,7 @@ function CreateSpot() {
             Guests will only get your exact address once they booked a
             reservation.
           </p>
-          <div>
+          <div id="labelSec">
             <label htmlFor="">Country: </label>
             <input
               type="text"
@@ -68,7 +68,7 @@ function CreateSpot() {
             />
           </div>
           <br />
-          <div>
+          <div id="labelSec">
             <label htmlFor="">Street Address: </label>
             <input
               type="text"
@@ -77,7 +77,7 @@ function CreateSpot() {
             />
           </div>
           <br />
-          <div>
+          <div id="labelSec">
             <label htmlFor="">City: </label>
             <input
               type="text"
@@ -86,7 +86,7 @@ function CreateSpot() {
             />
           </div>
           <br />
-          <div>
+          <div id="labelSec">
             <label htmlFor="">State: </label>
             <input
               type="text"
@@ -95,7 +95,7 @@ function CreateSpot() {
             />
           </div>
           <br />
-          <div>
+          <div id="labelSec">
             <label htmlFor="">Lat: </label>
             <input
               type="text"
@@ -104,7 +104,7 @@ function CreateSpot() {
             />
           </div>
           <br />
-          <div>
+          <div id="labelSec">
             <label htmlFor="">Lng: </label>
             <input
               type="text"
@@ -120,13 +120,16 @@ function CreateSpot() {
             fast wifi or parking, and what you love about the neighborhood.
           </p>
           <p>Please write at least 30 characters.</p>
-          <div>
+          <div id="labelSec">
             <label htmlFor="">Description: </label>
-            <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-            />
+            <textarea 
+            name="desciption" 
+            id="textArea"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            >
+            </textarea>
           </div>
         </div>
         <div id="createForm">
@@ -135,7 +138,7 @@ function CreateSpot() {
             Catch guests&apos; attention with a spot title that highlights what makes
             your place special.
           </p>
-          <div>
+          <div id="labelSec">
             <label htmlFor="">Name of your spot: </label>
             <input
               type="text"
@@ -150,7 +153,7 @@ function CreateSpot() {
             Competitive pricing can help your listing stand out and rank higher
             in search results.
           </p>
-          <div>
+          <div id="labelSec">
             <label htmlFor="">Price per night (USD): </label>
             <input
               type="text"
