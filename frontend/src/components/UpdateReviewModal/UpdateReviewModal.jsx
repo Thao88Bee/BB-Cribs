@@ -74,7 +74,7 @@ function UpdateReviewModal({reviewId}) {
         onChange={(e) => setReview(e.target.value)}
       ></textarea>
       <br />
-      <button className="no Btn" onClick={() => (onSubmit(), setReload(true))}>
+      <button className="no Btn" onClick={() => (onSubmit(), setReload((prev) => !prev))}>
         Update Your Review
       </button>
     </div>

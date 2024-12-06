@@ -140,7 +140,9 @@ const SingleSpot = () => {
                             <OpenModalButton
                               buttonText="Update Your Review"
                               onButtonClick={closeMenu}
-                              modalComponent={<UpdateReviewModal reviewId={id}/>}
+                              modalComponent={
+                                <UpdateReviewModal reviewId={id} />
+                              }
                             />
                           </div>
                           <OpenModalButton
