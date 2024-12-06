@@ -19,7 +19,7 @@ function PostReviewModal() {
 
   useEffect(() => {
     dispatch(getSpotReviews(spotId));
-  }, [dispatch, spotId, reload]);
+  }, [dispatch, reload, spotId]);
 
   const onSubmit = async () => {
     const newReview = {
@@ -70,7 +70,7 @@ function PostReviewModal() {
         onChange={(e) => setReview(e.target.value)}
       ></textarea>
       <br />
-      <button className="no Btn" onClick={async () => (onSubmit(), await setReload(true))}>
+      <button className="no Btn" onClick={() => (onSubmit(), setReload(true))}>
         Submit Your Review
       </button>
     </div>
