@@ -70,7 +70,7 @@ function PostReviewModal() {
         onChange={(e) => setReview(e.target.value)}
       ></textarea>
       <br />
-      <button className="no Btn" onClick={() => (onSubmit(), setReload(true))}>
+      <button className="no Btn" onClick={async () => (onSubmit(), await setReload(true))}>
         Submit Your Review
       </button>
     </div>
