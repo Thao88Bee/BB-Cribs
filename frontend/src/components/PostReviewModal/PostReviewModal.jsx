@@ -34,12 +34,11 @@ function PostReviewModal() {
       setReview("");
       setStars("");
       setReload((prev) => !prev)
-      closeModal();
     } catch (err) {
       setError("Fail")
       setTimeout(() => setError(null), 5000)
     }
-
+    closeModal();
   };
 
   return (
