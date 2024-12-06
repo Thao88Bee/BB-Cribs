@@ -9,6 +9,7 @@ function PostReviewModal() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
+  const [error, setError] = useState(null)
   const [review, setReview] = useState("");
   const [stars, setStars] = useState("");
   const [selected, setselected] = useState(0);
@@ -19,26 +20,32 @@ function PostReviewModal() {
 
   useEffect(() => {
     dispatch(getSpotReviews(spotId));
-  }, [dispatch, reload, spotId]);
+  }, [dispatch, reload, spotId, error]);
 
   const onSubmit = async () => {
-    const newReview = {
-      review,
-      stars,
-    };
+    try {
+      const newReview = {
+        review,
+        stars,
+      };
+  
+      await dispatch(createReview(newReview, spotId));
+  
+      setReview("");
+      setStars("");
+      setReload((prev) => !prev)
+      closeModal();
+    } catch (err) {
+      setError("Fail")
+      setTimeout(() => setError(null), 5000)
+    }
 
-    await dispatch(createReview(newReview, spotId));
-
-    setReview("");
-    setStars("");
-    setReload((prev) => !prev)
-
-    closeModal();
   };
 
   return (
     <div id="deleteModal">
       <h1 id="loginHeader">How was your stay?</h1>
+      {error}
       <p>Leave Your review here...</p>
       <div className="starInput">
         <div>
