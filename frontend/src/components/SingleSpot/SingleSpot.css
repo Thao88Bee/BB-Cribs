@@ -110,3 +110,11 @@
   justify-items: center;
   margin: 0 0 100px 0;
 }
+
+#reviewBtn {
+  display: flex;
+}
+
+#updatedReviewBtn {
+  margin: 0 15px 0 0;
+}

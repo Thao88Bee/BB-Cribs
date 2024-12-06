@@ -7,6 +7,7 @@ import { getSpotReviews } from "../../store/review";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
 import PostReviewModal from "../PostReviewModal/PostReviewModal";
+import UpdateReviewModal from "../UpdateReviewModal/UpdateReviewModal";
 import "./SingleSpot.css";
 
 const SingleSpot = () => {
@@ -134,16 +135,25 @@ const SingleSpot = () => {
                   <div className="deleteReviewBtnSec">
                     {user?.id === User?.id ? (
                       <>
-                        <OpenModalButton
-                          buttonText="Delete"
-                          onButtonClick={closeMenu}
-                          modalComponent={
-                            <DeleteReviewModal
-                              deleting={() => deleteReview(id)}
-                              reviewId={id}
+                        <div id="reviewBtn">
+                          <div id="updatedReviewBtn">
+                            <OpenModalButton
+                              buttonText="Post Your Review"
+                              onButtonClick={closeMenu}
+                              modalComponent={<UpdateReviewModal reviewId={id}/>}
                             />
-                          }
-                        />
+                          </div>
+                          <OpenModalButton
+                            buttonText="Delete"
+                            onButtonClick={closeMenu}
+                            modalComponent={
+                              <DeleteReviewModal
+                                deleting={() => deleteReview(id)}
+                                reviewId={id}
+                              />
+                            }
+                          />
+                        </div>
                       </>
                     ) : (
                       <></>
