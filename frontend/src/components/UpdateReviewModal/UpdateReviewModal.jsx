@@ -42,8 +42,8 @@ function UpdateReviewModal({reviewId}) {
 
   return (
     <div id="deleteModal">
-      <h1 id="loginHeader">How was your stay?</h1>
-      <p>Leave Your review here...</p>
+      <h1 id="loginHeader">Update your review</h1>
+      <p>Update your review here...</p>
       <div className="starInput">
         <div>
           {[...Array(5)].map((_, index) => {
