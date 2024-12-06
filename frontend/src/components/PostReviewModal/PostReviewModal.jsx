@@ -19,7 +19,6 @@ function PostReviewModal() {
 
   useEffect(() => {
     dispatch(getSpotReviews(spotId));
-    setReload((prev) => !prev)
   }, [dispatch, spotId, reload]);
 
   const onSubmit = async () => {
@@ -32,6 +31,7 @@ function PostReviewModal() {
 
     setReview("");
     setStars("");
+    setReload((prev) => !prev)
 
     closeModal();
   };
