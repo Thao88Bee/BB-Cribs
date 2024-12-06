@@ -1,13 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateSpot } from "../../store/spot";
+import { getSpot } from "../../store/spot";
 import "./UpdateSpot.css"
 
 function UpdateSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
+  const spot = useSelector((state) => state.spot.spot)
+
+  useEffect(() => {
+    dispatch(getSpot(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (spot) {
+      setName(spot?.name);
+      setAddress(spot?.address);
+      setCity(spot?.city);
+      setState(spot?.state);
+      setCountry(spot?.country);
+      setLat(spot?.lat);
+      setLng(spot?.lng);
+      setDescription(spot?.description);
+      setPrice(spot?.price);
+    }
+  }, [spot])
   
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
