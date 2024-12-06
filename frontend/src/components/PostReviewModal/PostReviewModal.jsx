@@ -45,7 +45,6 @@ function PostReviewModal() {
   return (
     <div id="deleteModal">
       <h1 id="loginHeader">How was your stay?</h1>
-      {error}
       <p>Leave Your review here...</p>
       <div className="starInput">
         <div>
