@@ -35,7 +35,7 @@ const reviews = [
   },
   {
     spotId: 2,
-    userId: 3,
+    userId: 2,
     review: "Lovely spot! Staff were friendly and the food was great.",
     stars: 4,
   },
