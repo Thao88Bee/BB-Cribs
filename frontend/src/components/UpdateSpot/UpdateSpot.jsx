@@ -3,13 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { updateSpot } from "../../store/spot";
 import { getSpot } from "../../store/spot";
-import "./UpdateSpot.css"
+import "./UpdateSpot.css";
 
 function UpdateSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { id } = useParams();
-  const spot = useSelector((state) => state.spot.spot)
+  const spot = useSelector((state) => state.spot.spot);
 
   useEffect(() => {
     dispatch(getSpot(id));
@@ -27,8 +27,8 @@ function UpdateSpot() {
       setDescription(spot?.description);
       setPrice(spot?.price);
     }
-  }, [spot])
-  
+  }, [spot]);
+
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -142,21 +142,20 @@ function UpdateSpot() {
           <p>Please write at least 30 characters.</p>
           <div id="labelSec">
             <label htmlFor="">Description: </label>
-            <textarea 
-            name="desciption" 
-            id="textArea"
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            >
-            </textarea>
+            <textarea
+              name="desciption"
+              id="textArea"
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
           </div>
         </div>
         <div id="createForm">
           <h3>Create a title for you spot</h3>
           <p>
-            Catch guests&apos; attention with a spot title that highlights what makes
-            your place special.
+            Catch guests&apos; attention with a spot title that highlights what
+            makes your place special.
           </p>
           <div id="labelSec">
             <label htmlFor="">Name of your spot: </label>
@@ -198,7 +197,9 @@ function UpdateSpot() {
             <input className="uploadImage" type="file" accept="image/*" />
           </div>
           <br />
-        <button id="createSpotBtn" onClick={onSubmit}>Update Your Spot</button>
+          <button id="createSpotBtn" onClick={onSubmit}>
+            Update Your Spot
+          </button>
         </div>
       </form>
     </>

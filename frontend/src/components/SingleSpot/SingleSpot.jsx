@@ -16,7 +16,7 @@ const SingleSpot = () => {
   const reviews = useSelector((state) => state.review.Reviews);
   const user = useSelector((state) => state.session.user);
 
-  const ownReview = reviews?.some((review) => review.userId === user?.id);
+  const ownReview = reviews?.some((review) => review?.userId === user?.id);
 
   const [deleted, setDeleted] = useState(false);
   const [showMenu, setShowMenu] = useState(false);

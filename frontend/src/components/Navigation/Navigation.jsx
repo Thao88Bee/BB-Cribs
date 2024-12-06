@@ -22,14 +22,14 @@ function Navigation({ isLoaded }) {
         <>
           {sessionUser ? (
             <>
-            <div id="navBarBtn">
-              <button className="createBtn" onClick={createSpot}>
-                Create A Spot
-              </button>
-              <li>
-                <ProfileButton user={sessionUser} />
-              </li>
-            </div>
+              <div id="navBarBtn">
+                <button className="createBtn" onClick={createSpot}>
+                  Create A Spot
+                </button>
+                <li>
+                  <ProfileButton user={sessionUser} />
+                </li>
+              </div>
             </>
           ) : (
             <>

@@ -5,15 +5,15 @@
 }
 
 #updateBtn {
-    margin: 0 20px 20px 0;
-    color: rgb(0, 177, 0);
-    background-color: rgb(210, 210, 210);
-    border: 2px solid rgb(0, 0, 0);
-    width: 150px;
-    padding: 5px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 5px rgb(0, 0, 0);
-    cursor: pointer;
+  margin: 0 20px 20px 0;
+  color: rgb(0, 177, 0);
+  background-color: rgb(210, 210, 210);
+  border: 2px solid rgb(0, 0, 0);
+  width: 150px;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0);
+  cursor: pointer;
 }
 
 .priceRatingSec {
@@ -22,4 +22,3 @@
   justify-content: space-around;
   margin: 0 0 0 45px;
 }
-

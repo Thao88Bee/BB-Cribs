@@ -122,21 +122,20 @@ function CreateSpot() {
           <p>Please write at least 30 characters.</p>
           <div id="labelSec">
             <label htmlFor="">Description: </label>
-            <textarea 
-            name="desciption" 
-            id="textArea"
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            >
-            </textarea>
+            <textarea
+              name="desciption"
+              id="textArea"
+              type="text"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
           </div>
         </div>
         <div id="createForm">
           <h3>Create a title for you spot</h3>
           <p>
-            Catch guests&apos; attention with a spot title that highlights what makes
-            your place special.
+            Catch guests&apos; attention with a spot title that highlights what
+            makes your place special.
           </p>
           <div id="labelSec">
             <label htmlFor="">Name of your spot: </label>
@@ -178,7 +177,9 @@ function CreateSpot() {
             <input className="uploadImage" type="file" accept="image/*" />
           </div>
           <br />
-          <button id="createSpotBtn" onClick={onSubmit}>Create Spot</button>
+          <button id="createSpotBtn" onClick={onSubmit}>
+            Create Spot
+          </button>
         </div>
       </form>
     </>
