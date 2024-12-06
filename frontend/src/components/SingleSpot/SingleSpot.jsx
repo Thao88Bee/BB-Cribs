@@ -97,60 +97,95 @@ const SingleSpot = () => {
             </button>
           </div>
         </div>
-        <div id="reviewSec">
-          {reviews?.map(({ id, review, stars, createdAt, User }) => (
-            <div key={id} className="reviews">
-              <div className="reviewNameDate">
-                <p>
-                  {User?.firstName}
-                  {User?.lastName}
-                </p>
-                <p>
-                  {new Date(createdAt).toLocaleString("default", {
-                    month: "long",
-                  })}
-                  , {new Date(createdAt).getFullYear()}
-                </p>
-              </div>
-              <p className="ratingStar">
-                {stars}
-                <span id="star">{!stars ? stars : "★"}</span>
+        {reviews?.length ? (
+          <>
+            <div>
+              <p>
+                <span>{reviews?.length ? reviews?.length : "New"}</span>{" "}
+                <span>{reviews?.length === 1 ? "Review" : "Reviews"}</span>
+                <span id="reviewsStar">
+                  {spot?.avgStarRating ? spot?.avgStarRating : "New"}
+                </span>{" "}
+                <span id="star">
+                  {!spot?.avgStarRating ? spot?.avgStarRating : "★"}
+                </span>
               </p>
-              <p className="reviewDescr">{review}</p>
-              <div className="lol">
-                {user?.id === User?.id ? (
-                  <>
-                    <OpenModalButton
-                      buttonText="Delete"
-                      onButtonClick={closeMenu}
-                      modalComponent={
-                        <DeleteReviewModal
-                          deleting={() => deleteReview(id)}
-                          reviewId={id}
-                        />
-                      }
-                    />
-                  </>
-                ) : (
-                  <></>
-                )}
-              </div>
             </div>
-          ))}
-          {user?.id !== spot?.Owner?.id && !ownReview ? (
-            <>
-              <div className="reviewDeleteBtn">
-                <OpenModalButton
-                  buttonText="Post Your Review"
-                  onButtonClick={closeMenu}
-                  modalComponent={<PostReviewModal />}
-                />
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
-        </div>
+            <div id="reviewSec">
+              {reviews?.map(({ id, review, stars, createdAt, User }) => (
+                <div key={id} className="reviews">
+                  <div className="reviewNameDate">
+                    <p>
+                      {User?.firstName}
+                      {User?.lastName}
+                    </p>
+                    <p>
+                      {new Date(createdAt).toLocaleString("default", {
+                        month: "long",
+                      })}
+                      , {new Date(createdAt).getFullYear()}
+                    </p>
+                  </div>
+                  <p className="ratingStar">
+                    {stars}
+                    <span id="star">{!stars ? stars : "★"}</span>
+                  </p>
+                  <p className="reviewDescr">{review}</p>
+                  <div className="deleteReviewBtnSec">
+                    {user?.id === User?.id ? (
+                      <>
+                        <OpenModalButton
+                          buttonText="Delete"
+                          onButtonClick={closeMenu}
+                          modalComponent={
+                            <DeleteReviewModal
+                              deleting={() => deleteReview(id)}
+                              reviewId={id}
+                            />
+                          }
+                        />
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {user?.id !== spot?.Owner?.id && !ownReview ? (
+                <>
+                  <div className="reviewDeleteBtn">
+                    <OpenModalButton
+                      buttonText="Post Your Review"
+                      onButtonClick={closeMenu}
+                      modalComponent={<PostReviewModal />}
+                    />
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="firstPostSec">
+              {user?.id !== spot?.Owner?.id && !ownReview ? (
+                <>
+                  <h2>Be the first to post a review!</h2>
+                  <div className="reviewDeleteBtn">
+                    <OpenModalButton
+                      buttonText="Post Your Review"
+                      onButtonClick={closeMenu}
+                      modalComponent={<PostReviewModal />}
+                    />
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

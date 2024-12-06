@@ -19,7 +19,7 @@ const spots = [
     name: "App Academy",
     description: "Place where web developers are created",
     price: 123,
-    avgRating: 3.5,
+    avgRating: 4.5,
   },
   {
     ownerId: 2,
@@ -32,7 +32,7 @@ const spots = [
     name: "Code Camp",
     description: "Immersive coding bootcamp for aspiring developers",
     price: 499,
-    avgRating: 2.5,
+    avgRating: 3.5,
   },
   {
     ownerId: 3,
@@ -45,7 +45,7 @@ const spots = [
     name: "Tech Innovators Hub",
     description: "A collaborative space for tech entrepreneurs and developers",
     price: 350,
-    avgRating: 3.5,
+    avgRating: 3,
   },
 ];
 
