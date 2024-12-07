@@ -28,7 +28,7 @@ function UpdateReviewModal({reviewId}) {
         review,
         stars,
       };
-  
+      
       await dispatch(updateReview(updatedReview, reviewId));
   
       setReview("");
@@ -38,7 +38,7 @@ function UpdateReviewModal({reviewId}) {
       setError("Fail")
       setTimeout(() => setError(null), 5000)
     }
-    
+
     closeModal();
   };
 

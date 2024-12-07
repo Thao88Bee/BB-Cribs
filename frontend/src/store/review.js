@@ -1,5 +1,3 @@
-// import { csrfFetch } from "./csrf";
-
 import { csrfFetch } from "./csrf";
 
 const GET_SPOT_REVIEWS = "review/getSpotReviews";
@@ -55,7 +53,7 @@ export const createReview = (newReview, spotId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(createReviewAction(data));
-    return data;
+    return res;
   }
 };
 
@@ -71,7 +69,7 @@ export const updateReview = (updatedReview, reviewId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(updateReviewAction(data));
-    return data;
+    return res;
   }
 };
 

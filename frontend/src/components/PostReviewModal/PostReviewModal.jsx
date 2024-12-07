@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useModal } from "../../context/Modal";
-import "./PostReviewModal.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../store/review";
 import { getSpotReviews } from "../../store/review";
+import "./PostReviewModal.css";
 
 function PostReviewModal() {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ function PostReviewModal() {
       setError("Fail")
       setTimeout(() => setError(null), 5000)
     }
-    
+
     closeModal();
   };
 
