@@ -19,9 +19,10 @@ function UpdateReviewModal({reviewId}) {
 
   useEffect(() => {
     dispatch(getSpotReviews(spotId));
-  }, [dispatch, reload, spotId, error]);
+  }, [dispatch, reload, spotId, error ]);
 
   const onSubmit = async () => {
+
     try {
       const updatedReview = {
         review,
@@ -32,11 +33,12 @@ function UpdateReviewModal({reviewId}) {
   
       setReview("");
       setStars("");
-      setReload((prev) => !prev)
+
     } catch (err) {
       setError("Fail")
       setTimeout(() => setError(null), 5000)
     }
+    
     closeModal();
   };
 
