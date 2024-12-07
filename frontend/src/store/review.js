@@ -80,7 +80,7 @@ const reviewsReducer = (state = initialState, action) => {
     case GET_SPOT_REVIEWS:
       return { ...state, Reviews: action.spot.Reviews };
     case CREATE_REVIEW:
-      return { ...state, Reviews: action.reviews };
+      return { ...state, Reviews: state.reviews?.filter((review) => review.id !== action.reviews) };
     case UPDATE_REVIEW:
       return { ...state, Reviews: action.reviews }
     case DELETE_REVIEW:

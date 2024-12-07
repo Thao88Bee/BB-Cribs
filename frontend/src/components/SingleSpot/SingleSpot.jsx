@@ -163,7 +163,7 @@ const SingleSpot = () => {
                   </div>
                 </div>
               ))}
-              {user?.id !== spot?.Owner?.id && !ownReview ? (
+              {user?.id !== spot?.Owner?.id && !ownReview && user ? (
                 <>
                   <div className="reviewDeleteBtn">
                     <OpenModalButton
