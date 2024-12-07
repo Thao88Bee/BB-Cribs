@@ -20,7 +20,6 @@ function PostReviewModal() {
 
   useEffect(() => {
     dispatch(getSpotReviews(spotId));
-    setReload((prev) => !prev)
   }, [dispatch, reload, spotId, error]);
 
   const onSubmit = async () => {
