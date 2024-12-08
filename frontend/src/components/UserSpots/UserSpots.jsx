@@ -50,7 +50,8 @@ function UserSpot() {
                 <img
                   id="spotsImage"
                   src="https://images6.alphacoders.com/105/1058802.jpg"
-                  alt=""
+                  alt={name}
+                  title={name}
                 />
               </li>
               <p>
