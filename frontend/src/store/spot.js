@@ -85,7 +85,7 @@ export const createSpot = (newSpot) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(createSpotAction(data));
-    return res;
+    return data;
   }
 };
 

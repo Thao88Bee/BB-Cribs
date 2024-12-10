@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createSpot } from "../../store/spot";
 import "./CreateSpot.css";
 
 function CreateSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session.user);
 
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -34,7 +33,7 @@ function CreateSpot() {
       price,
     };
 
-    await dispatch(createSpot(newSpot));
+    const getSpot = await dispatch(createSpot(newSpot));
 
     setName("");
     setAddress("");
@@ -46,7 +45,7 @@ function CreateSpot() {
     setDescription("");
     setPrice("");
 
-    navigate(`/users/${user.id}/spots`);
+    navigate(`/spots/${getSpot.id}`);
   };
 
   return (
