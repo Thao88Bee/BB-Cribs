@@ -38,7 +38,7 @@ export const getSpotReviews = (spotId) => async (dispatch) => {
   const data = await res.json();
 
   await dispatch(getSpotReviewsAction(data));
-  return data;
+  return res;
 };
 
 export const createReview = (newReview, spotId) => async (dispatch) => {
@@ -53,7 +53,7 @@ export const createReview = (newReview, spotId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     await dispatch(createReviewAction(data));
-    return data;
+    return res;
   }
 };
 
@@ -69,7 +69,7 @@ export const updateReview = (updatedReview, reviewId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     await dispatch(updateReviewAction(data));
-    return data;
+    return res;
   }
 };
 
