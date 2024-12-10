@@ -38,7 +38,7 @@ export const getSpotReviews = (spotId) => async (dispatch) => {
   const data = await res.json();
 
   await dispatch(getSpotReviewsAction(data));
-  return res;
+  return data;
 };
 
 export const createReview = (newReview, spotId) => async (dispatch) => {
@@ -53,7 +53,7 @@ export const createReview = (newReview, spotId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     await dispatch(createReviewAction(data));
-    return res;
+    return data;
   }
 };
 
@@ -69,7 +69,7 @@ export const updateReview = (updatedReview, reviewId) => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     await dispatch(updateReviewAction(data));
-    return res;
+    return data;
   }
 };
 
@@ -80,7 +80,7 @@ const reviewsReducer = (state = initialState, action) => {
     case GET_SPOT_REVIEWS:
       return { ...state, Reviews: action.spot.Reviews };
     case CREATE_REVIEW:
-      return { ...state, Reviews: state.reviews?.filter((review) => review.id !== action.reviews) };
+      return { ...state, Reviews: action.reviews };
     case UPDATE_REVIEW:
       return { ...state, Reviews: action.reviews }
     case DELETE_REVIEW:
