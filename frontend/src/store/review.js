@@ -37,7 +37,7 @@ export const getSpotReviews = (spotId) => async (dispatch) => {
   const res = await fetch(`/api/spots/${spotId}/reviews`);
   const data = await res.json();
 
-  dispatch(getSpotReviewsAction(data));
+  await dispatch(getSpotReviewsAction(data));
   return res;
 };
 
