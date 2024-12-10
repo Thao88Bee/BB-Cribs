@@ -21,13 +21,14 @@ const SingleSpot = () => {
 
   const [deleted, setDeleted] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  
+  const closeMenu = () => setShowMenu(false);
 
   useEffect(() => {
     dispatch(getSpot(id));
     dispatch(getSpotReviews(id));
-  }, [dispatch, id, deleted, showMenu]);
+  }, [dispatch, id, deleted, showMenu, reviews?.length]);
 
-  const closeMenu = () => setShowMenu(false);
 
   const deleteReview = async (reviewId) => {
     const res = await csrfFetch(`/api/reviews/${reviewId}`, {
