@@ -52,7 +52,7 @@ const SingleSpot = () => {
         <div id="singleSpotImages">
           <img
             className="spotImage one"
-            src="https://i.pinimg.com/originals/02/d2/3e/02d23eee4400f796fdce7d27c0e5b876.jpg"
+            src="https://i.pinimg.com/originals/a9/10/5c/a9105cdbeb639c2b2ffa3efcb273cb41.jpg"
             alt=""
           />
           <img
@@ -85,9 +85,9 @@ const SingleSpot = () => {
           </div>
           <div className="reserveSection">
             <p>
-              {spot?.avgRating ? spot?.avgStarRating : "New"}
+              {spot?.review || spot?.avgStarRating ? spot?.avgStarRating : "New "}
               <span id="star">
-                {!spot?.avgStarRating ? spot?.avgStarRating : "★"}
+                {!spot?.avgStarRating ? "★" : "★"}
               </span>
             </p>
             <p>${spot?.price} / Night</p>
@@ -119,7 +119,6 @@ const SingleSpot = () => {
                   <div className="reviewNameDate">
                     <p>
                       {User?.firstName}
-                      {User?.lastName}
                     </p>
                     <p>
                       {new Date(createdAt).toLocaleString("default", {
