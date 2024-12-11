@@ -64,18 +64,7 @@ function CreateSpot() {
     setHasSubmitted(true)
 
     if (Object.keys(validationErrors).length) {
-      return alert(`The following errors were found: 
-        ${validationErrors.name ? "* " + validationErrors.name : ""}
-        ${validationErrors.address ? "* " + validationErrors.address : ""}
-        ${validationErrors.city ? "* " + validationErrors.city : ""}
-        ${validationErrors.state ? "* " + validationErrors.state : ""}
-        ${validationErrors.country ? "* " + validationErrors.country : ""}
-        ${validationErrors.lat ? "* " + validationErrors.lat : ""}
-        ${validationErrors.lng ? "* " + validationErrors.lng : ""}
-        ${validationErrors.description ?"* " + validationErrors.description : ""}
-        ${validationErrors.price ? "* " + validationErrors.price : ""}
-        ${validationErrors.previewImage ? "* " + validationErrors.previewImage : ""}
-      `)
+      return
     }
 
     const newSpot = {
