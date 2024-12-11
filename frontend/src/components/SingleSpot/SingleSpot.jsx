@@ -52,27 +52,27 @@ const SingleSpot = () => {
         <div id="singleSpotImages">
           <img
             className="spotImage one"
-            src="https://images6.alphacoders.com/105/1058802.jpg"
+            src="https://i.pinimg.com/originals/02/d2/3e/02d23eee4400f796fdce7d27c0e5b876.jpg"
             alt=""
           />
           <img
             className="spotImage"
-            src="https://images6.alphacoders.com/105/1058802.jpg"
+            src="https://e1.pxfuel.com/desktop-wallpaper/1013/109/desktop-wallpaper-artstation-anime-house-bedroom.jpg"
             alt=""
           />
           <img
             className="spotImage"
-            src="https://images6.alphacoders.com/105/1058802.jpg"
+            src="https://thumb.ac-illust.com/c5/c5a8e6710f4da6c6c77efa016ab7d0f9_t.jpeg"
             alt=""
           />
           <img
             className="spotImage"
-            src="https://images6.alphacoders.com/105/1058802.jpg"
+            src="https://img.freepik.com/free-photo/cozy-home-interior-anime-style_23-2151176357.jpg"
             alt=""
           />
           <img
             className="spotImage"
-            src="https://images6.alphacoders.com/105/1058802.jpg"
+            src="https://wallpapercave.com/wp/wp6084696.jpg"
             alt=""
           />
         </div>

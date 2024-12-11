@@ -23,7 +23,7 @@ function Spots() {
                 <img
                   id="spotsImage"
                   key={id}
-                  src="https://images6.alphacoders.com/105/1058802.jpg"
+                  src="https://i.pinimg.com/originals/02/d2/3e/02d23eee4400f796fdce7d27c0e5b876.jpg"
                   alt={name}
                   title={name}
                 />

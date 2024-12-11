@@ -14,13 +14,20 @@ function PostReviewModal() {
   const [stars, setStars] = useState("");
   const [selected, setselected] = useState(0);
   const [reload, setReload] = useState(false);
+  const [disabled, setDisabled] =useState(true);
 
   const spot = useSelector((state) => state.spot.spot);
   const spotId = spot.id;
 
   useEffect(() => {
+    if (review.length <= 10 || stars <= 0) {
+      setDisabled(true)
+    } else {
+      setDisabled(false)
+    }
+    
     dispatch(getSpotReviews(spotId));
-  }, [dispatch, reload, spotId, error]);
+  }, [dispatch, reload, spotId, error, review, stars]);
 
   const onSubmit = async () => {
     try {
@@ -69,14 +76,14 @@ function PostReviewModal() {
       </div>
       <br />
       <textarea
-        name=""
+        name="review"
         id="textArea"
         type="text"
         value={review}
         onChange={(e) => setReview(e.target.value)}
       ></textarea>
       <br />
-      <button className="no Btn" onClick={() => (onSubmit(), setReload(true))}>
+      <button className="no Btn" disabled={disabled} onClick={() => (onSubmit(), setReload(true))}>
         Submit Your Review
       </button>
     </div>
