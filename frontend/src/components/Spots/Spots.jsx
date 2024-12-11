@@ -16,7 +16,7 @@ function Spots() {
     <>
       <ul id="spots">
         {spots?.map(({ id, city, state, name, price, avgRating }) => (
-          <div id="spotsBox" key={id}>
+          <div id="spotsBox" data-social={name} key={id}>
             <Link className="link" to={`/spots/${id}`}>
               <p>{name}</p>
               <li>
