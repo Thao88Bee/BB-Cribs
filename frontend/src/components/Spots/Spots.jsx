@@ -25,7 +25,6 @@ function Spots() {
                   key={id}
                   src="https://i.pinimg.com/originals/a9/10/5c/a9105cdbeb639c2b2ffa3efcb273cb41.jpg"
                   alt={name}
-                  title={name}
                 />
               </li>
               <p>
