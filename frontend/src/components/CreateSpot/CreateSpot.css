@@ -1,5 +1,5 @@
 #createHeader {
-  color: red;
+  color: rgb(255, 0, 0);
   margin: 90px 0 20px 0;
   text-align: center;
 }
@@ -22,6 +22,10 @@ input[type="file"]::file-selector-button {
   border: 2px solid rgb(0, 0, 0);
   cursor: pointer;
   border-radius: 5px;
+}
+
+.error {
+  color: rgb(255, 0, 0);
 }
 
 .uploadImage {
