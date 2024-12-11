@@ -1,18 +1,19 @@
-#spots {
+.spots {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   margin: 120px 90px 90px 90px;
   text-align: center;
-  gap: 30px;
+  column-gap: 40px;
+  row-gap: 60px;
 }
 
-#spotsBox {
+.spotsBox {
   border: 2px solid rgb(0, 0, 0);
   border-radius: 10px;
   box-shadow: 20px 20px 20px rgb(0, 0, 0);
 }
 
-#spotsBox::before {
+.spotsBox::before {
   content: attr(data-social);
   position: absolute;
   background-color: rgb(255, 0, 0);
@@ -23,7 +24,7 @@
   transition: 200ms ease;
 }
 
-#spotsBox:hover::before {
+.spotsBox:hover::before {
   transform: translate(-160px, -45px);
   opacity: 1;
   transition: 200ms ease;

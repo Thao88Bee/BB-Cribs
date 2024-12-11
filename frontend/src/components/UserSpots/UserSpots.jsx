@@ -41,9 +41,9 @@ function UserSpot() {
   return (
     <div>
       <h1 id="userHeader">Manage Spots</h1>
-      <ul id="spots">
+      <ul className="spots userSpots">
         {spots?.map(({ id, name, city, state, avgRating, price }) => (
-          <div id="spotsBox" key={id}>
+          <div className="spotsBox" data-social={name} key={id}>
             <Link className="link" to={`/spots/${id}`}>
               <p>{name}</p>
               <li>
