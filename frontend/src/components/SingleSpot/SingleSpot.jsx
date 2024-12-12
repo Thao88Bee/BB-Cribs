@@ -196,7 +196,7 @@ const SingleSpot = () => {
         ) : (
           <>
             <div className="firstPostSec">
-              {user?.id !== spot?.Owner?.id && !ownReview ? (
+              {user?.id !== spot?.Owner?.id && !ownReview && user ? (
                 <>
                   <h2>Be the first to post a review!</h2>
                   <div className="reviewDeleteBtn">
