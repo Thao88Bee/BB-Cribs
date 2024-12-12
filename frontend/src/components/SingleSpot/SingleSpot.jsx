@@ -19,9 +19,10 @@ const SingleSpot = () => {
   const user = useSelector((state) => state.session.user);
   const spots = useSelector((state) => state.spot.Spots);
 
+  const sorted = reviews?.sort((a, b) => (a.id > b.id ? -1 : 0));
+
   const spotid = spot?.id;
   const singlespot = spots?.find((spot) => spot.id === spotid);
-  console.log(singlespot);
 
   const ownReview = reviews?.some((review) => review?.userId === user?.id);
 
@@ -131,7 +132,7 @@ const SingleSpot = () => {
               </p>
             </div>
             <div id="reviewSec">
-              {reviews?.map(({ id, review, stars, createdAt, User }) => (
+              {sorted?.map(({ id, review, stars, createdAt, User }) => (
                 <div key={id} className="reviews">
                   <div className="reviewNameDate">
                     <p>{User?.firstName}</p>
