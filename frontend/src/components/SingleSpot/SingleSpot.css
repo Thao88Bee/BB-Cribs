@@ -41,6 +41,11 @@
   margin: 30px 200px;
 }
 
+.reviewRate {
+  display: flex;
+  gap: 5px;
+}
+
 #reserveBtn {
   background-color: rgb(255, 0, 0);
   width: 120px;

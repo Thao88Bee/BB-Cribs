@@ -17,9 +17,9 @@ function CreateSpot() {
   const [lng, setLng] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [previewImage, setPreviewImage] =useState("");
+  const [previewImage, setPreviewImage] = useState("");
   const [validationErrors, setValidationErrors] = useState();
-  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [hasSubmitted, setHasSubmitted] = useState(false);
 
   useEffect(() => {
     const errors = {};
@@ -52,19 +52,30 @@ function CreateSpot() {
       errors.price = "Price per night is required";
     }
     if (!previewImage.length) {
-      errors.previewImage = "Preview Image is Required"
+      errors.previewImage = "Preview Image is Required";
     }
 
     setValidationErrors(errors);
-  }, [name, address, city, state, country, lat, lng, description, price, previewImage]);
+  }, [
+    name,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    description,
+    price,
+    previewImage,
+  ]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    setHasSubmitted(true)
+    setHasSubmitted(true);
 
     if (Object.keys(validationErrors).length) {
-      return
+      return;
     }
 
     const newSpot = {
@@ -115,7 +126,11 @@ function CreateSpot() {
               onChange={(e) => setCountry(e.target.value)}
             />
           </div>
-          <div className="error">{hasSubmitted && validationErrors.country && `* ${validationErrors.country}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.country &&
+              `* ${validationErrors.country}`}
+          </div>
           <br />
           <div id="labelSec">
             <label htmlFor="">Street Address: </label>
@@ -125,7 +140,11 @@ function CreateSpot() {
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
-          <div className="error">{hasSubmitted && validationErrors.address && `* ${validationErrors.address}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.address &&
+              `* ${validationErrors.address}`}
+          </div>
           <br />
           <div id="labelSec">
             <label htmlFor="">City: </label>
@@ -135,7 +154,11 @@ function CreateSpot() {
               onChange={(e) => setCity(e.target.value)}
             />
           </div>
-          <div className="error">{hasSubmitted && validationErrors.city && `* ${validationErrors.city}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.city &&
+              `* ${validationErrors.city}`}
+          </div>
           <br />
           <div id="labelSec">
             <label htmlFor="">State: </label>
@@ -145,7 +168,11 @@ function CreateSpot() {
               onChange={(e) => setState(e.target.value)}
             />
           </div>
-          <div className="error">{hasSubmitted && validationErrors.state && `* ${validationErrors.state}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.state &&
+              `* ${validationErrors.state}`}
+          </div>
           <br />
           <div id="labelSec">
             <label htmlFor="">Lat: </label>
@@ -155,7 +182,11 @@ function CreateSpot() {
               onChange={(e) => setLat(e.target.value)}
             />
           </div>
-          <div className="error">{hasSubmitted && validationErrors.lat && `* ${validationErrors.lat}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.lat &&
+              `* ${validationErrors.lat}`}
+          </div>
           <br />
           <div id="labelSec">
             <label htmlFor="">Lng: </label>
@@ -165,7 +196,11 @@ function CreateSpot() {
               onChange={(e) => setLng(e.target.value)}
             />
           </div>
-          <div className="error">{hasSubmitted && validationErrors.lng && `* ${validationErrors.lng}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.lng &&
+              `* ${validationErrors.lng}`}
+          </div>
         </div>
         <div id="createForm">
           <h3>Describe your place to guests</h3>
@@ -184,7 +219,11 @@ function CreateSpot() {
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
-          <div className="error">{hasSubmitted && validationErrors.description && `* ${validationErrors.description}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.description &&
+              `* ${validationErrors.description}`}
+          </div>
         </div>
         <div id="createForm">
           <h3>Create a title for you spot</h3>
@@ -200,7 +239,11 @@ function CreateSpot() {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className="error">{hasSubmitted && validationErrors.name && `* ${validationErrors.name}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.name &&
+              `* ${validationErrors.name}`}
+          </div>
         </div>
         <div id="createForm">
           <h3>Set a base price for your spot</h3>
@@ -216,21 +259,29 @@ function CreateSpot() {
               onChange={(e) => setPrice(e.target.value)}
             />
           </div>
-          <div className="error">{hasSubmitted && validationErrors.price && `* ${validationErrors.price}`}</div>
+          <div className="error">
+            {hasSubmitted &&
+              validationErrors.price &&
+              `* ${validationErrors.price}`}
+          </div>
         </div>
         <div id="createForm">
           <h3>Liven up your spot with photos</h3>
           <p>Submit a link to at least one photo to publish your spot.</p>
           <p>Preview Image URL</p>
           <div id="createForm">
-            <input 
-            className="uploadImage" 
-            type="file" accept="image/*" 
-            value={previewImage} 
-            onChange={(e) => setPreviewImage(e.target.value)}/>
+            <input
+              className="uploadImage"
+              type="file"
+              accept="image/*"
+              value={previewImage}
+              onChange={(e) => setPreviewImage(e.target.value)}
+            />
             <div className="error">
-              {hasSubmitted && validationErrors.previewImage && `* ${validationErrors.previewImage}`}
-              </div>
+              {hasSubmitted &&
+                validationErrors.previewImage &&
+                `* ${validationErrors.previewImage}`}
+            </div>
             <p>Image URL</p>
             <input className="uploadImage" type="file" accept="image/*" />
             <br />

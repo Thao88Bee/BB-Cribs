@@ -15,14 +15,14 @@ function SignupFormModal() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const [disabled, setdisabled] = useState(true);
-  
+
   useEffect(() => {
     if (username.length <= 4 || password.length <= 6) {
-      setdisabled(true)
+      setdisabled(true);
     } else {
-      setdisabled(false)
+      setdisabled(false);
     }
-  }, [username, password])
+  }, [username, password]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

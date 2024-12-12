@@ -4,46 +4,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateReview } from "../../store/review";
 import { getSpotReviews } from "../../store/review";
 
-function UpdateReviewModal({reviewId}) {
+function UpdateReviewModal({ reviewId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
 
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
   const [review, setReview] = useState("");
   const [stars, setStars] = useState("");
   const [selected, setselected] = useState(0);
   const [reload, setReload] = useState(false);
-  const [disabled, setDisabled] =useState(true);
+  const [disabled, setDisabled] = useState(true);
 
   const spot = useSelector((state) => state.spot.spot);
   const spotId = spot.id;
 
   useEffect(() => {
     if (review.length <= 10 || stars <= 0) {
-      setDisabled(true)
+      setDisabled(true);
     } else {
-      setDisabled(false)
+      setDisabled(false);
     }
 
     dispatch(getSpotReviews(spotId));
-  }, [dispatch, reload, spotId, error, review, stars ]);
+  }, [dispatch, reload, spotId, error, review, stars]);
 
   const onSubmit = async () => {
-
     try {
       const updatedReview = {
         review,
         stars,
       };
-      
+
       await dispatch(updateReview(updatedReview, reviewId));
-  
+
       setReview("");
       setStars("");
-
     } catch (err) {
-      setError("Fail")
-      setTimeout(() => setError(null), 5000)
+      setError("Fail");
+      setTimeout(() => setError(null), 5000);
     }
 
     closeModal();
@@ -83,7 +81,11 @@ function UpdateReviewModal({reviewId}) {
         onChange={(e) => setReview(e.target.value)}
       ></textarea>
       <br />
-      <button className="no Btn" disabled={disabled} onClick={() => (onSubmit(), setReload(true))}>
+      <button
+        className="no Btn"
+        disabled={disabled}
+        onClick={() => (onSubmit(), setReload(true))}
+      >
         Update Your Review
       </button>
     </div>

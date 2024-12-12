@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getSpot } from "../../store/spot";
 import { getSpotReviews } from "../../store/review";
+import { getAllSpots } from "../../store/spot";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import DeleteReviewModal from "../DeleteReviewModal/DeleteReviewModal";
 import PostReviewModal from "../PostReviewModal/PostReviewModal";
@@ -16,19 +17,24 @@ const SingleSpot = () => {
   const spot = useSelector((state) => state.spot.spot);
   const reviews = useSelector((state) => state.review.Reviews);
   const user = useSelector((state) => state.session.user);
+  const spots = useSelector((state) => state.spot.Spots);
+
+  const spotid = spot?.id;
+  const singlespot = spots?.find((spot) => spot.id === spotid);
+  console.log(singlespot);
 
   const ownReview = reviews?.some((review) => review?.userId === user?.id);
 
   const [deleted, setDeleted] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
-  
+
   const closeMenu = () => setShowMenu(false);
 
   useEffect(() => {
+    dispatch(getAllSpots());
     dispatch(getSpot(id));
     dispatch(getSpotReviews(id));
   }, [dispatch, id, deleted, showMenu, reviews?.length]);
-
 
   const deleteReview = async (reviewId) => {
     const res = await csrfFetch(`/api/reviews/${reviewId}`, {
@@ -84,14 +90,22 @@ const SingleSpot = () => {
             <p id="description">{spot?.description}</p>
           </div>
           <div className="reserveSection">
-            <p>
-              {spot?.review || spot?.avgStarRating ? spot?.avgStarRating : ""}
-              <span id="star">
-                {!spot?.avgStarRating ? " ★ " : " ★ "}
+            <p className="reviewRate">
+              <span>
+                {spot?.review || spot?.avgStarRating
+                  ? singlespot?.avgRating
+                  : ""}
               </span>
+              <span id="star">{!spot?.avgStarRating ? " ★ " : " ★ "}</span>
               <span>{reviews?.length ? " · " : ""}</span>
               <span>{reviews?.length ? reviews?.length : " New"}</span>
-              <span>{reviews?.length <= 0 ? "" : reviews?.length === 1 ?  " Review" : " Reviews"}</span>
+              <span>
+                {reviews?.length <= 0
+                  ? ""
+                  : reviews?.length === 1
+                  ? " Review"
+                  : " Reviews"}
+              </span>
             </p>
             <p>${spot?.price} / Night</p>
             <button
@@ -109,7 +123,7 @@ const SingleSpot = () => {
                 <span>{reviews?.length ? reviews?.length : "New"}</span>{" "}
                 <span>{reviews?.length === 1 ? "Review" : "Reviews"}</span>
                 <span id="reviewsStar">
-                  {spot?.avgStarRating ? spot?.avgStarRating : "New"}
+                  {spot?.avgStarRating ? singlespot?.avgRating : "New"}
                 </span>{" "}
                 <span id="star">
                   {!spot?.avgStarRating ? spot?.avgStarRating : "★"}
@@ -120,9 +134,7 @@ const SingleSpot = () => {
               {reviews?.map(({ id, review, stars, createdAt, User }) => (
                 <div key={id} className="reviews">
                   <div className="reviewNameDate">
-                    <p>
-                      {User?.firstName}
-                    </p>
+                    <p>{User?.firstName}</p>
                     <p>
                       {new Date(createdAt).toLocaleString("default", {
                         month: "long",
