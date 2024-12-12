@@ -8,6 +8,7 @@ import "./UpdateSpot.css";
 function UpdateSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { id } = useParams();
   const spot = useSelector((state) => state.spot.spot);
 

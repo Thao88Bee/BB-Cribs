@@ -13,7 +13,9 @@ import "./SingleSpot.css";
 
 const SingleSpot = () => {
   const dispatch = useDispatch();
+
   const { id } = useParams();
+
   const spot = useSelector((state) => state.spot.spot);
   const reviews = useSelector((state) => state.review.Reviews);
   const user = useSelector((state) => state.session.user);

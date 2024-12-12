@@ -17,6 +17,7 @@ function PostReviewModal() {
   const [disabled, setDisabled] = useState(true);
 
   const spot = useSelector((state) => state.spot.spot);
+
   const spotId = spot.id;
 
   useEffect(() => {
