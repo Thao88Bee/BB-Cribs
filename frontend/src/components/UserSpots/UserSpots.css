@@ -26,3 +26,13 @@
   justify-content: space-around;
   margin: 0 0 0 45px;
 }
+
+.userLink {
+  text-align: center;
+  margin: 100px;
+}
+
+.createLink {
+  text-decoration: none;
+  color: rgb(0, 149, 0);
+}

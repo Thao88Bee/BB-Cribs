@@ -6,7 +6,6 @@ import "./Spots.css";
 
 function Spots() {
   const dispatch = useDispatch();
-
   const spots = useSelector((state) => state.spot.Spots);
 
   useEffect(() => {

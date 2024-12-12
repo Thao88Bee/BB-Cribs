@@ -7,7 +7,6 @@ import "./CreateSpot.css";
 function CreateSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");

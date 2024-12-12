@@ -8,8 +8,17 @@ import "./UpdateSpot.css";
 function UpdateSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { id } = useParams();
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [country, setCountry] = useState("");
+  const [lat, setLat] = useState("");
+  const [lng, setLng] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+
   const spot = useSelector((state) => state.spot.spot);
 
   useEffect(() => {
@@ -29,16 +38,6 @@ function UpdateSpot() {
       setPrice(spot?.price);
     }
   }, [spot]);
-
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [country, setCountry] = useState("");
-  const [lat, setLat] = useState("");
-  const [lng, setLng] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
 
   const onSubmit = async (e) => {
     e.preventDefault();

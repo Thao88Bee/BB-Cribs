@@ -13,9 +13,9 @@ import "./SingleSpot.css";
 
 const SingleSpot = () => {
   const dispatch = useDispatch();
-
   const { id } = useParams();
-
+  const [deleted, setDeleted] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
   const spot = useSelector((state) => state.spot.spot);
   const reviews = useSelector((state) => state.review.Reviews);
   const user = useSelector((state) => state.session.user);
@@ -27,9 +27,6 @@ const SingleSpot = () => {
   const singlespot = spots?.find((spot) => spot.id === spotid);
 
   const ownReview = reviews?.some((review) => review?.userId === user?.id);
-
-  const [deleted, setDeleted] = useState(false);
-  const [showMenu, setShowMenu] = useState(false);
 
   const closeMenu = () => setShowMenu(false);
 

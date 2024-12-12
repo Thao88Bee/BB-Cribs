@@ -10,11 +10,12 @@ import "./UserSpots.css";
 function UserSpot() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const spots = useSelector((state) => state.spot.Spots);
-
   const [deleted, setDeleted] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+
+  const spots = useSelector((state) => state.spot.Spots);
+  
+  const closeMenu = () => setShowMenu(false);
 
   useEffect(() => {
     dispatch(getUserSpots());
@@ -23,8 +24,6 @@ function UserSpot() {
   const updateUserSpot = (spotId) => {
     navigate(`/spots/${spotId}/update`);
   };
-
-  const closeMenu = () => setShowMenu(false);
 
   const deleteUserSpot = async (spotId) => {
     const res = await csrfFetch(`/api/spots/${spotId}`, {
@@ -41,52 +40,64 @@ function UserSpot() {
   return (
     <div>
       <h1 id="userHeader">Manage Spots</h1>
-      <ul className="spots userSpots">
-        {spots?.map(({ id, name, city, state, avgRating, price }) => (
-          <div className="spotsBox" data-social={name} key={id}>
-            <Link className="link" to={`/spots/${id}`}>
-              <li>
-                <img
-                  id="spotsImage"
-                  src="https://i.pinimg.com/originals/a9/10/5c/a9105cdbeb639c2b2ffa3efcb273cb41.jpg"
-                  alt={name}
-                  title={name}
-                />
-              </li>
-              <p>{name}</p>
-              <p>
-                {city}, {state}
-              </p>
-              <div className="priceRatingSec">
-                <p>${price} / Night</p>
-                <p>
-                  {avgRating ? avgRating : "New"}{" "}
-                  <span id="star">{!avgRating ? avgRating : "★"}</span>
-                </p>
-              </div>
-            </Link>
-            <button id="updateBtn" onClick={() => updateUserSpot(id)}>
-              Update
-            </button>
-            <>
-              {
+      {spots?.length ? (
+        <>
+          <ul className="spots userSpots">
+            {spots?.map(({ id, name, city, state, avgRating, price }) => (
+              <div className="spotsBox" data-social={name} key={id}>
+                <Link className="link" to={`/spots/${id}`}>
+                  <li>
+                    <img
+                      id="spotsImage"
+                      src="https://i.pinimg.com/originals/a9/10/5c/a9105cdbeb639c2b2ffa3efcb273cb41.jpg"
+                      alt={name}
+                      title={name}
+                    />
+                  </li>
+                  <p>{name}</p>
+                  <p>
+                    {city}, {state}
+                  </p>
+                  <div className="priceRatingSec">
+                    <p>${price} / Night</p>
+                    <p>
+                      {avgRating ? avgRating : "New"}{" "}
+                      <span id="star">{!avgRating ? avgRating : "★"}</span>
+                    </p>
+                  </div>
+                </Link>
+                <button id="updateBtn" onClick={() => updateUserSpot(id)}>
+                  Update
+                </button>
                 <>
-                  <OpenModalButton
-                    buttonText="Delete"
-                    onButtonClick={closeMenu}
-                    modalComponent={
-                      <DeleteSpotModal
-                        deleting={() => deleteUserSpot(id)}
-                        spotId={id}
+                  {
+                    <>
+                      <OpenModalButton
+                        buttonText="Delete"
+                        onButtonClick={closeMenu}
+                        modalComponent={
+                          <DeleteSpotModal
+                            deleting={() => deleteUserSpot(id)}
+                            spotId={id}
+                          />
+                        }
                       />
-                    }
-                  />
+                    </>
+                  }
                 </>
-              }
-            </>
+              </div>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <>
+          <div className="userLink">
+            <Link className="createLink" to="/spots/create">
+              Create a New Spot
+            </Link>
           </div>
-        ))}
-      </ul>
+        </>
+      )}
     </div>
   );
 }

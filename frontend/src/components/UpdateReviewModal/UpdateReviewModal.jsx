@@ -7,7 +7,6 @@ import { getSpotReviews } from "../../store/review";
 function UpdateReviewModal({ reviewId }) {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-
   const [error, setError] = useState(null);
   const [review, setReview] = useState("");
   const [stars, setStars] = useState("");
@@ -16,6 +15,7 @@ function UpdateReviewModal({ reviewId }) {
   const [disabled, setDisabled] = useState(true);
 
   const spot = useSelector((state) => state.spot.spot);
+  
   const spotId = spot.id;
 
   useEffect(() => {

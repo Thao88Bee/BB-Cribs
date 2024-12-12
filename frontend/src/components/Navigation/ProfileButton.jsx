@@ -1,8 +1,8 @@
-import * as sessionActions from "../../store/session";
 import { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { FaHouseUser } from "react-icons/fa";
+import * as sessionActions from "../../store/session";
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal";
@@ -15,7 +15,6 @@ function ProfileButton({ user }) {
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
-
     setShowMenu(!showMenu);
   };
 
@@ -44,7 +43,6 @@ function ProfileButton({ user }) {
 
   const manageSpot = (e) => {
     e.preventDefault();
-
     closeMenu();
     navigate(`/users/${user.id}/spots`);
   };
