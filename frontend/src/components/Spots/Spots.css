@@ -1,7 +1,9 @@
 .spots {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, 350px);
+  justify-content: center;
   margin: 120px 90px 90px 90px;
+  padding: 0;
   text-align: center;
   column-gap: 40px;
   row-gap: 60px;
@@ -11,6 +13,7 @@
   border: 2px solid rgb(0, 0, 0);
   border-radius: 10px;
   box-shadow: 20px 20px 20px rgb(0, 0, 0);
+  width: 330px;
 }
 
 .spotsBox::before {
@@ -37,8 +40,13 @@
   color: rgb(0, 0, 0);
 }
 
+.previewImageSec {
+  display: grid;
+  justify-content: center;
+}
+
 #spotsImage {
-  height: 200px;
+  height: 190px;
   margin: 30px 10px 10px 10px;
   border-radius: 10px;
 }

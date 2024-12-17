@@ -46,7 +46,7 @@ function UserSpot() {
             {spots?.map(({ id, name, city, state, avgRating, price }) => (
               <div className="spotsBox" data-social={name} key={id}>
                 <Link className="link" to={`/spots/${id}`}>
-                  <li>
+                  <li className="previewImageSec">
                     <img
                       id="spotsImage"
                       src="https://i.pinimg.com/originals/a9/10/5c/a9105cdbeb639c2b2ffa3efcb273cb41.jpg"
