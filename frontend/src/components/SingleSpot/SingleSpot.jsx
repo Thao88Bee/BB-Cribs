@@ -52,8 +52,9 @@ const SingleSpot = () => {
     <>
       <div id="singleSpot">
         <h1 id="singleSpotHeader">{spot?.name}</h1>
-        <p>
-          {spot?.city}, {spot?.state}, {spot?.country}
+        <p className="location">
+          <span>{spot?.city}, {spot?.state},</span>
+          <span> {spot?.country}</span>
         </p>
         <div id="singleSpotImages">
           <img
